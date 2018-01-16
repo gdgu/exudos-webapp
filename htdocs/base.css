@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css?family=Oxygen');
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+
+body {
+    background-color: #bbb;
+    margin: 0;
+    margin-top: 3.2em;
+    font-family: 'Oxygen';
+}
+div.top {
+    background-color: rgba(0, 0, 0, 0.8);
+    position: fixed;
+    top: 0;
+    text-align: right;
+    color: #fff;
+    font-size: 1em;
+    padding: 2%;
+    width: 96%;
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+div.topline {
+    background-color: #189;
+    height: 0.3em;
+    width: 50%;
+}
