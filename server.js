@@ -14,7 +14,7 @@ var server = http.createServer((req, res) => {
         fs.readFile('htdocs/index.html', 'utf8', (err, data) => {
             if(err) throw err;
 
-            res.end(htmldyn.getHtmlStringWithIdentifierValues(data, {
+            res.end(htmldyn.getHtmlStringWithIdValues(data, {
                 universityname: 'GD Goenka University'
             }));
         });
