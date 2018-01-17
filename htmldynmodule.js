@@ -1,5 +1,5 @@
 // function to return a modified html string containing identifiers enclosed in $$ and replace them with provided values for corresponding keys
-exports.putIdentifierValues = function(html, values) {
+exports.getHtmlStringWithIdValues = function(html, values) {
     // error handling relating to mismatch in type of arguments
     if(typeof html !== 'string') throw new TypeError("Argument html must be of type string. Found " + typeof html + ".");
     if(typeof values !== 'object') throw new TypeError("Argument values must be of type object. Found " + typeof values + ".");
