@@ -1,0 +1,20 @@
+{
+  "name": "gdgu-stud-info-sys",
+  "version": "0.1.0",
+  "description": "A student information system to facilitate students with their informative needs.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/swghosh/gdgu-stud-info-sys.git"
+  },
+  "author": "SwG Ghosh",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/swghosh/gdgu-stud-info-sys/issues"
+  },
+  "homepage": "https://github.com/swghosh/gdgu-stud-info-sys#readme"
+}
