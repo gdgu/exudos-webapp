@@ -70,8 +70,8 @@ var server = http.createServer((req, res) => {
 });
 
 // define server port
-const port = 8080;
+const port = process.env.PORT || 5000;
 
 // make server listen to port
-server.listen(8080);
+server.listen(port);
 console.log('Started server at port ' + port);
