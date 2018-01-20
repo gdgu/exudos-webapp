@@ -19,3 +19,6 @@ div.top {
     padding-top: 1em;
     padding-bottom: 1em;
 }
+h1,p {
+    margin: 2%;
+}
