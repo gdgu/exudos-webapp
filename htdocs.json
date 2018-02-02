@@ -1,0 +1,26 @@
+{
+    "/": {
+        "file": "/index.html",
+        "type": "text/html",
+        "encoding": "utf8",
+        "dynamic": true
+    },
+    "/index.html": {
+        "type": "text/html",
+        "encoding": "utf8",
+        "dynamic": true
+    },
+    "/base.css": {
+        "type": "text/css",
+        "encoding": "utf8"
+    },
+    "/404": {
+        "file": "/404.html",
+        "type": "text/html",
+        "encoding": "utf8"
+    },
+    "/404.html": {
+        "type": "text/html",
+        "encoding": "utf8"
+    }
+}
