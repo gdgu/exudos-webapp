@@ -2,6 +2,8 @@ var fs = require('fs');
 var querystring = require('querystring');
 var url = require('url');
 
+var htmldyn = require('./htmldynmodule.js');
+
 exports.serve = (webroot, htdocs) => {
     return (req, res) => {
         var pathname = url.parse(req.url).pathname;
@@ -16,17 +18,21 @@ exports.serve = (webroot, htdocs) => {
             }
             fs.readFile(filePath, htdocs[pathname].encoding, (err, data) => {
                 if(err) throw err;
-                res.end(data, htdocs[pathname].encoding);
+
+                if(htdocs[pathname].dynamic) {
+                    var jsFilePath = filePath.substring(0, filePath.lastIndexOf('.')) + '.dyn.js';
+                    var jsFileValues = require(jsFilePath).values;
+
+                    res.end(htmldyn.getHtmlStringWithIdValues(data, jsFileValues), htdocs[pathname].encoding);
+                }
+                else {
+                    res.end(data, htdocs[pathname].encoding);
+                }
             });
         }
         else {
-            res.writeHead(404, {'Content-Type': htdocs['/404'].type});
-            var filePath;
-            filePath = webroot + htdocs['/404'].file;
-            fs.readFile(filePath, htdocs['/404'].encoding, (err, data) => {
-                if(err) throw err;
-                res.end(data, htdocs['/404'].encoding);
-            });
+            req.url = '/404';
+            exports.serve(webroot, htdocs)(req, res);
         }
     };
 };
