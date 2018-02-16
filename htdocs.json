@@ -22,5 +22,9 @@
     "/404.html": {
         "type": "text/html",
         "encoding": "utf8"
+    },
+    "/images/a.jpg": {
+        "type": "image/jpg",
+        "encoding": "binary"
     }
 }

@@ -8,7 +8,7 @@ body {
     font-family: 'Oxygen';
 }
 div.top {
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(6, 33, 39, 0.87);
     position: fixed;
     top: 0;
     text-align: right;
@@ -18,7 +18,20 @@ div.top {
     width: 96%;
     padding-top: 1em;
     padding-bottom: 1em;
+    z-index: 1;
 }
-h1,p {
-    margin: 2%;
+div.lay {
+    width: 100%;
+    background-image: url(images/a.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+div.overlay {
+    color: rgba(210, 210, 223, 0.8);
+    width: 90%;
+    background-color: rgba(17, 59, 57, 0.9);    
+    padding: 5%;
+    font-size: 1.2em;
+    font-family: 'Raleway';
 }
