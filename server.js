@@ -14,7 +14,7 @@ const htdocs = JSON.parse(fs.readFileSync('htdocs.json', 'utf8'));
 var server = http.createServer(static.serve(webroot, htdocs));
 
 // define server port
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 8080;
 
 // make server listen to port
 server.listen(port);
