@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/swghosh/gdgu-stud-info-sys/issues"
   },
-  "homepage": "https://github.com/swghosh/gdgu-stud-info-sys#readme"
+  "homepage": "https://github.com/swghosh/gdgu-stud-info-sys#readme",
+  "dependencies": {
+    "mysql": "^2.15.0"
+  }
 }
