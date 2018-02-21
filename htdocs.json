@@ -23,8 +23,8 @@
         "type": "text/html",
         "encoding": "utf8"
     },
-    "/images/a.jpg": {
-        "type": "image/jpg",
+    "/images/github-logo.png": {
+        "type": "image/png",
         "encoding": "binary"
     }
 }

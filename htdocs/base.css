@@ -2,17 +2,17 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway');
 
 body {
-    background-color: #bbb;
+    background-color: #fff;
     margin: 0;
     margin-top: 3.2em;
-    font-family: 'Oxygen';
+    font-family: 'Raleway';
 }
 div.top {
-    background-color: rgba(6, 33, 39, 0.87);
+    background-color: rgba(255, 255, 255, 0.87);
     position: fixed;
     top: 0;
     text-align: right;
-    color: #fff;
+    color: #029;
     font-size: 1em;
     padding: 2%;
     width: 96%;
@@ -20,18 +20,25 @@ div.top {
     padding-bottom: 1em;
     z-index: 1;
 }
+div.top span {
+    letter-spacing: 0.2em;
+    padding: 2%;
+    border-bottom: 1px dotted black;
+    display: block;
+}
 div.lay {
     width: 100%;
-    background-image: url(images/a.jpg);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    text-align: center;
 }
 div.overlay {
-    color: rgba(210, 210, 223, 0.8);
-    width: 90%;
-    background-color: rgba(17, 59, 57, 0.9);    
-    padding: 5%;
+    color: #000;
+    letter-spacing: 2px;
+    width: 80%;  
+    padding: 10%;
     font-size: 1.2em;
-    font-family: 'Raleway';
+    font-family: 'Oxygen';
+}
+img.github:hover {
+    background-color: #ccc;
+    border-radius: 50%;
 }
