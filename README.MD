@@ -1,6 +1,6 @@
-# Exsis System
+# projectExodus
 
-![Info Page of Project](https://imgur.com/download/IVpkACy)
+![Info Page of Project](https://i.imgur.com/Hr1GblQ.png)
 
 ## Primary Objective
 
