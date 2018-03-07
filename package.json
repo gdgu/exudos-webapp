@@ -18,6 +18,6 @@
   },
   "homepage": "https://github.com/swghosh/gdgu-stud-info-sys#readme",
   "dependencies": {
-    "mysql": "^2.15.0"
+    "mongodb": "^3.0.4"
   }
 }
