@@ -2,20 +2,25 @@
 var http = require('http');
 var fs = require('fs');
 var querystring = require('querystring');
+var url = require('url');
+var static = require('node-static');
 
 var htmldyn = require('./htmldynmodule.js');
-var static = require('./staticservemodule.js');
 
 // define webroot folder and a list of files with path, encoding, etc.
 const webroot = __dirname + '/htdocs';
-const htdocs = JSON.parse(fs.readFileSync('htdocs.json', 'utf8'));
+
+// create a static file server
+var fileServer = new static.Server(webroot);
 
 // create the server
-var server = http.createServer(static.serve(webroot, htdocs));
+var httpServer = http.createServer((req, res) => {
+    fileServer.serve(req, res);
+});
 
 // define server port
 const port = process.env.PORT || 8080;
 
 // make server listen to port
-server.listen(port);
+httpServer.listen(port);
 console.log('Started server at port ' + port);

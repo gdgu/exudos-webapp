@@ -1,0 +1,8 @@
+{
+    "/index.html": {
+        "dynamic": true
+    },
+    "/404.html": {
+        "dynamic": false
+    }
+}
