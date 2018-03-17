@@ -1,8 +1,19 @@
 {
+    "/": {
+        "alias": "/index.html"
+    },
     "/index.html": {
-        "dynamic": true
+        "dynamic": true,
+        "encoding": "utf8",
+        "type": "text/html",
+        "dynvalues": "dyns/index.dyn.js"
+    },
+    "/404": {
+        "alias": "/404.html"
     },
     "/404.html": {
-        "dynamic": false
+        "dynamic": false,
+        "encoding": "utf8",
+        "type": "text/html"
     }
 }

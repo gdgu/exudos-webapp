@@ -7,20 +7,36 @@ var static = require('node-static');
 
 var htmldyn = require('./htmldynmodule.js');
 
-// define webroot folder and a list of files with path, encoding, etc.
+// define webroot folder
 const webroot = __dirname + '/htdocs';
 
-// create a static file server
-var fileServer = new static.Server(webroot);
+// populate the list of dynamically serviceable pages
+const dynPagesFile = __dirname + '/dynhtdocs.json';
+fs.readFile(dynPagesFile, "utf8", (err, data) => {
+    // in case of error in reading file
+    if(err) throw new Error("Could not populate the list of dynamically serviceable pages.\n" + err.message);
 
-// create the server
-var httpServer = http.createServer((req, res) => {
-    fileServer.serve(req, res);
+    var dynPages = JSON.parse(data);
+
+    startServer(webroot, dynPages);
 });
 
-// define server port
-const port = process.env.PORT || 8080;
+var startServer = (webroot, dynPages) => {
+    // create a dynamic file server
+    var dynamicServer
 
-// make server listen to port
-httpServer.listen(port);
-console.log('Started server at port ' + port);
+    // create a static file server
+    var fileServer = new static.Server(webroot);
+
+    // create the server
+    var httpServer = http.createServer((req, res) => {
+        fileServer.serve(req, res);
+    });
+
+    // define server port
+    const port = process.env.PORT || 8080;
+
+    // make server listen to port
+    httpServer.listen(port);
+    console.log('Started server at port ' + port);
+}
