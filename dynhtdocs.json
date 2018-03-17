@@ -3,7 +3,6 @@
         "alias": "/index.html"
     },
     "/index.html": {
-        "dynamic": true,
         "encoding": "utf8",
         "type": "text/html",
         "dynvalues": "dyns/index.dyn.js"
@@ -12,8 +11,8 @@
         "alias": "/404.html"
     },
     "/404.html": {
-        "dynamic": false,
         "encoding": "utf8",
-        "type": "text/html"
+        "type": "text/html",
+        "dynvalues": "dyns/index.dyn.js"
     }
 }
