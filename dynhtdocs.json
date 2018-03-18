@@ -13,6 +13,6 @@
     "/404.html": {
         "encoding": "utf8",
         "type": "text/html",
-        "dynvalues": "dyns/index.dyn.js"
+        "dynvalues": "dyns/404.dyn.js"
     }
 }

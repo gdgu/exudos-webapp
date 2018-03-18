@@ -24,6 +24,8 @@ fs.readFile(dynPagesFile, "utf8", (err, data) => {
 });
 
 var startServer = (webroot, dynPages) => {
+    // define the path to 404.html
+    const path404 = '/404';
     // create a dynamic file server
     var dynamicServer = new dynserver.Server(webroot, dynPages);
 
@@ -32,15 +34,22 @@ var startServer = (webroot, dynPages) => {
 
     // create the web server
     var httpServer = http.createServer((req, res) => {
-        var parsedUrl = url.parse(req.url);
-        // dynamically serviceable resources
-        if(dynPages[parsedUrl.pathname] !== undefined) {
-            dynamicServer.serve(req, res);
-        }
-        // static resources
-        else {
-            fileServer.serve(req, res);
-        }
+        req.on('end', () => {
+            var parsedUrl = url.parse(req.url);
+            // dynamically serviceable resources
+            if(dynPages[parsedUrl.pathname] !== undefined) {
+                dynamicServer.serve(req, res);
+            }
+            // static resources
+            else {
+                fileServer.serve(req, res, (err) => {
+                    if(err) {
+                        req.url = path404;
+                        dynamicServer.serve(req, res);
+                    }
+                });
+            }
+        }).resume();
     });
 
     // define server port
