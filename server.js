@@ -12,7 +12,7 @@ var dynserver = require('./dynservermodule.js');
 const webroot = __dirname + '/htdocs';
 
 // populate the list of dynamically serviceable pages
-const dynPagesFile = __dirname + '/dynhtdocs.json';
+const dynPagesFile = __dirname + '/dynhtdocs.json'; 
 fs.readFile(dynPagesFile, "utf8", (err, data) => {
     // in case of error in reading file
     if(err) throw new Error("Could not populate the list of dynamically serviceable pages.\n" + err.message);
