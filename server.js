@@ -8,7 +8,7 @@ var static = require('node-static');
 var htmldyn = require('./htmldynmodule.js');
 var dynserver = require('./dynservermodule.js');
 
-// define webroot folder
+// define webroot folder path
 const webroot = __dirname + '/htdocs';
 
 // populate the list of dynamically serviceable pages
