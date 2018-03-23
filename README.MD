@@ -1,6 +1,6 @@
 # projectExudos
 
-![Info Page of Project](https://i.imgur.com/Hr1GblQ.png)
+![Info Page of Project](https://i.imgur.com/RextnGe.png)
 
 ## Primary Objective
 
