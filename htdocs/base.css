@@ -98,3 +98,6 @@ div.foot {
     text-align: center;
     letter-spacing: 1px;
 }
+div.foot a:hover {
+    text-decoration: none;
+}
