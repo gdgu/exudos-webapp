@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 // import the required modules
 var http = require('http');
 var fs = require('fs');
