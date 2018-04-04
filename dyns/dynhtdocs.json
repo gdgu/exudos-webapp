@@ -5,7 +5,7 @@
     "/index.html": {
         "encoding": "utf8",
         "type": "text/html",
-        "dynvalues": "dyns/index.dyn.js"
+        "dynvalues": "/index.dyn.js"
     },
     "/404": {
         "alias": "/404.html"
@@ -13,6 +13,6 @@
     "/404.html": {
         "encoding": "utf8",
         "type": "text/html",
-        "dynvalues": "dyns/404.dyn.js"
+        "dynvalues": "/404.dyn.js"
     }
 }

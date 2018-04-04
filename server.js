@@ -7,14 +7,15 @@ var querystring = require('querystring');
 var url = require('url');
 var static = require('node-static');
 
-var htmldyn = require('./htmldynmodule.js');
-var dynserver = require('./dynservermodule.js');
+var htmldyn = require('./lib/htmldyn/htmldynmodule');
+var dynserver = require('./lib/htmldyn/dynservermodule');
 
-// define webroot folder path
+// define webroot, dynsroot folder path
 const webroot = __dirname + '/htdocs';
+const dynsroot = __dirname + '/dyns';
 
 // populate the list of dynamically serviceable pages
-const dynPagesFile = __dirname + '/dynhtdocs.json'; 
+const dynPagesFile = __dirname + '/dyns/dynhtdocs.json'; 
 fs.readFile(dynPagesFile, "utf8", (err, data) => {
     // in case of error in reading file
     if(err) throw new Error("Could not populate the list of dynamically serviceable pages.\n" + err.message);
@@ -29,7 +30,7 @@ var startServer = (webroot, dynPages) => {
     // define the path to 404.html
     const path404 = '/404';
     // create a dynamic file server
-    var dynamicServer = new dynserver.Server(webroot, dynPages);
+    var dynamicServer = new dynserver.Server(webroot, dynPages, dynsroot);
 
     // create a static file server
     var fileServer = new static.Server(webroot);
