@@ -15,7 +15,7 @@ const webroot = __dirname + '/htdocs';
 const dynsroot = __dirname + '/dyns';
 
 // populate the list of dynamically serviceable pages
-const dynPagesFile = __dirname + '/dyns/dynhtdocs.json'; 
+const dynPagesFile = __dirname + '/dyns/dynhtdocs.json';
 fs.readFile(dynPagesFile, "utf8", (err, data) => {
     // in case of error in reading file
     if(err) throw new Error("Could not populate the list of dynamically serviceable pages.\n" + err.message);
@@ -37,6 +37,14 @@ var startServer = (webroot, dynPages) => {
 
     // create the web server
     var httpServer = http.createServer((req, res) => {
+        var bodyData = '';
+        var cookies = '';
+
+        req.on('data', (chunk) => {
+            // prematurely terminate the request if exceeds a certain limit
+            if(bodyData.length > 1e6) req.connection.destroy();
+            else bodyData += chunk;
+        });
         req.on('end', () => {
             var parsedUrl = url.parse(req.url);
             // dynamically serviceable resources
@@ -60,5 +68,5 @@ var startServer = (webroot, dynPages) => {
 
     // make server listen to port
     httpServer.listen(port);
-    console.log('Started server at port ' + port); 
+    console.log('Started server at port ' + port);
 }
