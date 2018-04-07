@@ -6,6 +6,7 @@ var fs = require('fs');
 var querystring = require('querystring');
 var url = require('url');
 var static = require('node-static');
+var cookie = require('cookie');
 
 var htmldyn = require('./lib/htmldyn/htmldynmodule');
 var dynserver = require('./lib/htmldyn/dynservermodule');
@@ -37,8 +38,11 @@ var startServer = (webroot, dynPages) => {
 
     // create the web server
     var httpServer = http.createServer((req, res) => {
+
         var bodyData = '';
-        var cookies = '';
+        var existingCookies = cookie.parse(
+            (req.headers.cookie) ? req.headers.cookie : ''
+        );
 
         req.on('data', (chunk) => {
             // prematurely terminate the request if exceeds a certain limit
