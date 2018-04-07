@@ -14,5 +14,10 @@
         "encoding": "utf8",
         "type": "text/html",
         "dynvalues": "/404.dyn.js"
+    },
+    "/login.html": {
+        "encoding": "utf8",
+        "type": "text/html",
+        "dynvalues": "/login.dyn.js"
     }
 }
