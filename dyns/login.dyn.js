@@ -1,6 +1,11 @@
 var fs = require('fs');
 
-exports.values = JSON.parse(fs.readFileSync('dyns/globalvars.json', 'utf8'));
+exports.makeValues = (req, res, cookies, data) => {
+    var values = JSON.parse(fs.readFileSync('dyns/globalvars.json', 'utf8'));
+    values.username = 'test.student';
+    values.userFullName = 'John Smith';
 
-exports.values.username = 'test.student';
-exports.values.userFullName = 'John Smith';
+    return values;
+}
+
+

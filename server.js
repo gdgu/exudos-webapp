@@ -53,14 +53,14 @@ var startServer = (webroot, dynPages) => {
             var parsedUrl = url.parse(req.url);
             // dynamically serviceable resources
             if(dynPages[parsedUrl.pathname] !== undefined) {
-                dynamicServer.serve(req, res);
+                dynamicServer.serve(req, res, existingCookies, bodyData);
             }
             // static resources
             else {
                 fileServer.serve(req, res, (err) => {
                     if(err) {
                         req.url = path404;
-                        dynamicServer.serve(req, res);
+                        dynamicServer.serve(req, res, existingCookies, bodyData);
                     }
                 });
             }
