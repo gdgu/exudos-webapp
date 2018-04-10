@@ -1,10 +1,13 @@
 var fs = require('fs');
 var crypto = require('crypto');
+var cookie = require('cookie');
+var htmldynmodule = require('../lib/htmldyn/htmldynmodule');
 
 // hashing type is RSA
 const hashType = 'RSA-SHA';
 
-exports.makeValues = (req, res, cookies, data) => {
+exports.servePage = (req, res, dataAndOptions) => {
+    var cookies = dataAndOptions.cookies;
     var values = JSON.parse(fs.readFileSync('dyns/globalvars.json', 'utf8'));
 
     if(cookies['lTokenA'] !== undefined && cookies['lTokenB'] !== undefined) {
@@ -25,7 +28,8 @@ exports.makeValues = (req, res, cookies, data) => {
         values.userFullName = 'NO NAME AS NO LOGIN';
     }
 
-    return values;
+    res.writeHead(200, dataAndOptions.httpHeaders);
+    res.end(htmldynmodule.getHtmlStringWithIdValues(dataAndOptions.fileData, values), dataAndOptions.fileEncoding);
 }
 
 

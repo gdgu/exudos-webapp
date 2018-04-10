@@ -1,7 +1,9 @@
 var fs = require('fs');
+var htmldynmodule = require('../lib/htmldyn/htmldynmodule');
 
-exports.makeValues = (req, res, cookies, data) => {
+exports.servePage = (req, res, dataAndOptions) => {
     var values = JSON.parse(fs.readFileSync('dyns/globalvars.json', 'utf8'));
 
-    return values;
+    res.writeHead(200, dataAndOptions.httpHeaders);
+    res.end(htmldynmodule.getHtmlStringWithIdValues(dataAndOptions.fileData, values), dataAndOptions.fileEncoding);
 }
