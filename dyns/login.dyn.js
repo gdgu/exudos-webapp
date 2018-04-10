@@ -1,35 +1,38 @@
 var fs = require('fs');
-var crypto = require('crypto');
 var cookie = require('cookie');
 var htmldynmodule = require('../lib/htmldyn/htmldynmodule');
 
-// hashing type is RSA
-const hashType = 'RSA-SHA';
+var authenticateUser = require('../lib/bl/authenticateuser');
 
 exports.servePage = (req, res, dataAndOptions) => {
     var cookies = dataAndOptions.cookies;
     var values = JSON.parse(fs.readFileSync('dyns/globalvars.json', 'utf8'));
 
-    if(cookies['lTokenA'] !== undefined && cookies['lTokenB'] !== undefined) {
-        
-        var passwordHash = crypto.createHash(hashType);
-        passwordHash.update('abcd123');
-
-        var userPassword = passwordHash.digest('hex');
-
-        if(cookies['lTokenA'] === 'test.student' && cookies['lTokenB'] === userPassword) {
-            values.username = 'test.student';
-            values.userFullName = 'John Smith';
+    var callback1 = (flag) => {
+        if(flag) {
+            values.username = 'test.student';        
+            values.userFullName = 'John Test Smith';
         }
+        else {
+            values.username = 'NOUSER';
+            values.userFullName = 'NO NAME AS WRONG LOGIN';
+        }
+
+        res.writeHead(200, dataAndOptions.httpHeaders);
+        res.end(htmldynmodule.getHtmlStringWithIdValues(dataAndOptions.fileData, values), dataAndOptions.fileEncoding);
     }
 
-    else {       
+    if(cookies['lTokenA'] !== undefined && cookies['lTokenB'] !== undefined) {
+        authenticateUser.authenticate(cookies['lTokenA'], cookies['lTokenB'], callback1);
+    }
+
+    else {
         values.username = 'NOUSER';
         values.userFullName = 'NO NAME AS NO LOGIN';
-    }
 
-    res.writeHead(200, dataAndOptions.httpHeaders);
-    res.end(htmldynmodule.getHtmlStringWithIdValues(dataAndOptions.fileData, values), dataAndOptions.fileEncoding);
+        res.writeHead(200, dataAndOptions.httpHeaders);
+        res.end(htmldynmodule.getHtmlStringWithIdValues(dataAndOptions.fileData, values), dataAndOptions.fileEncoding);
+    }
 }
 
 
