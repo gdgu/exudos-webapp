@@ -10,12 +10,10 @@ exports.servePage = (req, res, dataAndOptions) => {
 
     var callback1 = (flag, currentUser) => {
         if(flag) {
-            values.username = currentUser.username;        
-            values.userFullName = currentUser.username;
+            values.username = currentUser.username;
         }
         else {
             values.username = 'NOUSER';
-            values.userFullName = 'NO NAME AS WRONG LOGIN';
         }
 
         res.writeHead(200, dataAndOptions.httpHeaders);
@@ -27,11 +25,10 @@ exports.servePage = (req, res, dataAndOptions) => {
     }
 
     else {
-        values.username = 'NOUSER';
-        values.userFullName = 'NO NAME AS NO LOGIN';
-
-        res.writeHead(200, dataAndOptions.httpHeaders);
-        res.end(htmldynmodule.getHtmlStringWithIdValues(dataAndOptions.fileData, values), dataAndOptions.fileEncoding);
+        dataAndOptions.httpHeaders['Content-Type'] = undefined;
+        dataAndOptions.httpHeaders['Location'] = '/';
+        res.writeHead(302, dataAndOptions.httpHeaders);
+        res.end();
     }
 }
 
