@@ -15,10 +15,10 @@
         "type": "text/html",
         "dynvalues": "/index.dyn.js"
     },
-    "/login.html": {
+    "/landing.html": {
         "encoding": "utf8",
         "type": "text/html",
-        "dynvalues": "/login.dyn.js"
+        "dynvalues": "/landing.dyn.js"
     },
     "/signin.html": {
         "encoding": "utf8",
