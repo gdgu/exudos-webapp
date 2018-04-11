@@ -25,10 +25,9 @@ exports.servePage = (req, res, dataAndOptions) => {
     }
 
     else {
-        dataAndOptions.httpHeaders['Content-Type'] = undefined;
         dataAndOptions.httpHeaders['Location'] = '/';
         res.writeHead(302, dataAndOptions.httpHeaders);
-        res.end();
+        res.end('');
     }
 }
 
