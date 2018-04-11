@@ -19,5 +19,10 @@
         "encoding": "utf8",
         "type": "text/html",
         "dynvalues": "/login.dyn.js"
+    },
+    "/signin.html": {
+        "encoding": "utf8",
+        "type": "text/html",
+        "dynvalues": "/signin.dyn.js"
     }
 }
