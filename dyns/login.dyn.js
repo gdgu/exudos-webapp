@@ -8,10 +8,10 @@ exports.servePage = (req, res, dataAndOptions) => {
     var cookies = dataAndOptions.cookies;
     var values = JSON.parse(fs.readFileSync('dyns/globalvars.json', 'utf8'));
 
-    var callback1 = (flag) => {
+    var callback1 = (flag, currentUser) => {
         if(flag) {
-            values.username = 'test.student';        
-            values.userFullName = 'John Test Smith';
+            values.username = currentUser.username;        
+            values.userFullName = currentUser.username;
         }
         else {
             values.username = 'NOUSER';
