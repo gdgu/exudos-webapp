@@ -8,13 +8,13 @@ exports.servePage = (req, res, dataAndOptions) => {
     var getParamas = bodyparsermodule.parseHttpBody(url.parse(req.url).query);
 
     if(getParamas['invalidUser'] !== undefined) {
-        values.errorMsg = '! error : invalid username or password';
+        values.errorMsg = 'invalid username or password!';
     }
     else if(getParamas['signedOut'] !== undefined) {
-        values.errorMsg = 'you\'ve been signed out :)';
+        values.errorMsg = 'you have been signed out :)';
     }
     else if(getParamas['signinFirst'] !== undefined) {
-        values.errorMsg = 'please signin first !';
+        values.errorMsg = 'please signin first!';
     }
     else {
         values.errorMsg = '';
