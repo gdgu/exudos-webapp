@@ -15,7 +15,7 @@ exports.servePage = (req, res, dataAndOptions) => {
     res.writeHead(302, [
         ['Set-Cookie', lTokenCookieString[0]],
         ['Set-Cookie', lTokenCookieString[1]],
-        ['Location', '/landing.html']
+        ['Location', '/?signedOut']
     ]);
     res.end('');
 }

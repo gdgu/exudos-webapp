@@ -25,7 +25,7 @@ exports.servePage = (req, res, dataAndOptions) => {
     }
 
     else {
-        dataAndOptions.httpHeaders['Location'] = '/';
+        dataAndOptions.httpHeaders['Location'] = '/?signinFirst';
         res.writeHead(302, dataAndOptions.httpHeaders);
         res.end('');
     }

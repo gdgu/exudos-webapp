@@ -32,7 +32,7 @@ exports.servePage = (req, res, dataAndOptions) => {
             res.end('');
         }
         else {
-            dataAndOptions.httpHeaders['Location'] = '/';
+            dataAndOptions.httpHeaders['Location'] = '/?invalidUser';
             res.writeHead(302, dataAndOptions.httpHeaders);
             res.end('');
         }
@@ -61,7 +61,7 @@ exports.servePage = (req, res, dataAndOptions) => {
     }
 
     else {
-        dataAndOptions.httpHeaders['Location'] = '/';
+        dataAndOptions.httpHeaders['Location'] = '/?invalidUser';
         res.writeHead(302, dataAndOptions.httpHeaders);
         res.end('');
     }

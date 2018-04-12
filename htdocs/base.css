@@ -32,6 +32,12 @@ div.top span {
     padding: 1%;
     display: block;
 }
+div.errormsg {
+    color: #fff;
+    letter-spacing: 2px;
+    background-color: rgba(255, 11, 11, 0.5);
+    font-family: 'Oxygen';
+}
 div.lay {
     width: 100%;
     text-align: center;
@@ -64,7 +70,7 @@ form {
 input {
     transition: all 0.2s;
     border: none;
-    font-size: 1.5em;
+    font-size: 1.3em;
     font-family: 'Raleway';
     outline: none;
     border-bottom: 1px solid #000;
@@ -73,7 +79,7 @@ input {
 }
 input:focus {
     border-bottom: 2px solid rgb(128, 0, 128);
-    font-size: 2em;
+    font-size: 1.65em;
 }
 input[type=submit] {
     background-color: none;
@@ -87,6 +93,8 @@ input[type=submit] {
 }
 input[type=submit]:hover {
     background-color: #aaa;
+    box-shadow: 0 0 1px #999;
+    border: 2px solid #999;
 }
 input[type=submit]:disabled:hover {
     background-color: rgba(0, 0, 0, 0);
