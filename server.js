@@ -5,6 +5,7 @@ var http = require('http');
 var fs = require('fs');
 var querystring = require('querystring');
 var url = require('url');
+var path = require('path');
 var static = require('node-static');
 var cookie = require('cookie');
 
@@ -43,6 +44,9 @@ var startServer = (webroot, dynPages) => {
         var existingCookies = cookie.parse(
             (req.headers.cookie) ? req.headers.cookie : ''
         );
+
+        // normalise path names to avoid issues
+        req.url = path.normalize(req.url);
 
         req.on('data', (chunk) => {
             // prematurely terminate the request if exceeds a certain limit
