@@ -1,7 +1,5 @@
-var fs = require('fs');
 var cookie = require('cookie');
 var crypto = require('crypto');
-var htmldynmodule = require('../lib/htmldyn/htmldynmodule');
 var bodyparsermodule = require('../lib/htmldyn/bodyparsermodule');
 var authenticateUser = require('../lib/bl/authenticateuser');
 var dbConnect = require('../lib/db/dbconnect');
@@ -10,7 +8,6 @@ const hashType = 'RSA-SHA';
 
 exports.servePage = (req, res, dataAndOptions) => {
     var cookies = dataAndOptions.cookies;
-    var values = JSON.parse(fs.readFileSync('dyns/globalvars.json', 'utf8'));
 
     var postParams = bodyparsermodule.parseHttpBody(dataAndOptions.httpBody);
     console.log(postParams)

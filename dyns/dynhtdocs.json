@@ -20,9 +20,14 @@
         "type": "text/html",
         "dynvalues": "/landing.dyn.js"
     },
-    "/signin.html": {
+    "/signin.do": {
         "encoding": "utf8",
-        "type": "text/html",
+        "type": "text/plain",
         "dynvalues": "/signin.dyn.js"
+    },
+    "/signout.do": {
+        "encoding": "utf8",
+        "type": "text/plain",
+        "dynvalues": "/signout.dyn.js"
     }
 }
