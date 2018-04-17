@@ -5,7 +5,7 @@ body {
     background-color: #fff;
     margin: 0;
     margin-top: 3.7em;
-    font-family: 'Raleway';
+    font-family: 'Raleway', sans-serif;
 }
 .nouline {
     text-decoration: none;
@@ -32,11 +32,14 @@ div.top span {
     padding: 1%;
     display: block;
 }
+div.top span code {
+    text-transform: lowercase;
+}
 div.errormsg {
     color: #fff;
     letter-spacing: 2px;
     background-color: rgba(255, 11, 11, 0.5);
-    font-family: 'Oxygen';
+    font-family: 'Oxygen', serif;
 }
 div.lay {
     width: 100%;
@@ -48,7 +51,7 @@ div.overlay {
     width: 84%;  
     padding: 8%;
     font-size: 1.2em;
-    font-family: 'Oxygen';
+    font-family: 'Oxygen', serif;
 }
 img.github:hover {
     background-color: #ccc;
@@ -61,7 +64,7 @@ div.content {
 div.content p {
     font-size: 1.4em;
     text-transform: lowercase;
-    font-family: 'Oxygen';
+    font-family: 'Oxygen', serif;
     letter-spacing: 2px;
 }
 form {
@@ -71,7 +74,7 @@ input {
     transition: all 0.2s;
     border: none;
     font-size: 1.3em;
-    font-family: 'Raleway';
+    font-family: 'Raleway', sans-serif;
     outline: none;
     border-bottom: 1px solid #000;
     letter-spacing: 1px;
