@@ -17,6 +17,7 @@
         <meta name="theme-color" content="#ccc" />
         <link rel="stylesheet" href="/base.css" type="text/css" />
         <link rel="stylesheet" href="/another.css" type="text/css" />
+        <link rel="stylesheet" href="/cards.css" type="text/css" />
     </head>
 
     <body>
@@ -25,14 +26,30 @@
         </div>
         <div class="lay">
             <div class="overlay">
-                Hi, $$ username $$ <br><br>
-                You're seeing this page because you have logged in. This page will be filled with content of your importance pretty soon. :)<br><br>
-                Alternatively, you may log out from <a class="defaultcolor" href="/signout.do">here</a>.<br>
-                <br><br>
+                Hi, $$ username $$!
             </div>
         </div>
         <div class="content">
-
+            <table id="news">
+                <tr class="card">
+                    <td class="title">
+                        <small>posted by</small> some.faculty <small>for</small> some.course
+                    </td>
+                    <td class="content">
+                        <h3>This is a notice maybe!</h3><br>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam atque nisi ut quas debitis sed provident ratione laboriosam, voluptatum vero alias quis reprehenderit ipsa beatae accusantium! Sed cum reprehenderit sequi!
+                    </td>
+                </tr>
+                <tr class="card">
+                    <td class="title">
+                        <small>posted by</small> test.faculty <small>for</small> another.course
+                    </td>
+                    <td class="content">
+                        <h3>This is another notice maybe!</h3><br>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam atque nisi ut quas debitis sed provident ratione laboriosam, voluptatum vero alias quis reprehenderit ipsa beatae accusantium! Sed cum reprehenderit sequi!
+                    </td>
+                </tr>
+            </table>
         </div>
         <div class="foot">
             <small><a href="#" class="defaultcolor">report-bug</a> | <a href="#" class="defaultcolor">reset-password</a> | <a href="#" class="defaultcolor">suggest-feature</a> | <a href="#" class="defaultcolor">contact-us</a></small><br><a href="/" class="nouline defaultcolor">$$ projectname $$ <small>project</a></small>.<br>
