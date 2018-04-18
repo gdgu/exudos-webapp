@@ -25,6 +25,7 @@ table#news td.title {
     font-size: 0.8em;
     letter-spacing: 2px;
     padding: 4%;
+    background-color: #fff;
 }
 table#news td.content {
 	text-align: left;
