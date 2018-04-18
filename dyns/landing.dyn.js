@@ -11,13 +11,15 @@ exports.servePage = (req, res, dataAndOptions) => {
     var callback1 = (flag, currentUser) => {
         if(flag) {
             values.username = currentUser.username;
+
+            res.writeHead(200, dataAndOptions.httpHeaders);
+            res.end(htmldynmodule.getHtmlStringWithIdValues(dataAndOptions.fileData, values), dataAndOptions.fileEncoding);
         }
         else {
-            values.username = 'NOUSER';
+            dataAndOptions.httpHeaders['Location'] = '/?signinFirst';
+            res.writeHead(302, dataAndOptions.httpHeaders);
+            res.end('');
         }
-
-        res.writeHead(200, dataAndOptions.httpHeaders);
-        res.end(htmldynmodule.getHtmlStringWithIdValues(dataAndOptions.fileData, values), dataAndOptions.fileEncoding);
     }
 
     if(cookies['lTokenA'] !== undefined && cookies['lTokenB'] !== undefined) {
