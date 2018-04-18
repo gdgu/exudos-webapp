@@ -108,6 +108,7 @@ div.foot {
     padding: 2em;
     text-align: center;
     letter-spacing: 1px;
+    color: #333;
 }
 div.foot a:hover {
     text-decoration: none;
