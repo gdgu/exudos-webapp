@@ -1,6 +1,6 @@
 div.top.land {
     background-color: rgba(0, 80, 155, 0.97);
-    font-size: 1em;
+    font-size: 0.9em;
     position: fixed;
     top: 0;
     text-align: left;
@@ -31,4 +31,29 @@ span.userblock {
 
 div.foot {
     background-color: rgba(0, 80, 155, 0.17);
+}
+
+div.floatmenu {
+    position: fixed;
+    width: 19.5%;
+    margin: 1.5em;
+    color: #000;
+    margin-left: 30%;
+    background-color: rgba(0, 80, 155, 0.82);
+    padding: 0.1%;
+    color: #fff;
+    padding: 1%;
+}
+
+div.floatmenu ul.menu {
+    list-style-type: none;
+    margin: 0;
+    text-align: center;
+    display: flex;
+    font-size: 0.89em;
+}
+
+div.floatmenu ul.menu li {
+    display: block;
+    padding: 1%;
 }
