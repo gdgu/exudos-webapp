@@ -34,6 +34,7 @@ div.foot {
 }
 
 div.floatmenu {
+    display: block;
     position: fixed;
     width: 19.5%;
     margin: 1.5em;
@@ -48,6 +49,7 @@ div.floatmenu {
 div.floatmenu ul.menu {
     list-style-type: none;
     margin: 0;
+    margin-right: 10%;
     text-align: center;
     display: flex;
     font-size: 0.89em;
@@ -56,4 +58,11 @@ div.floatmenu ul.menu {
 div.floatmenu ul.menu li {
     display: block;
     padding: 1%;
+    text-align: center;
+}
+
+div.arrow {
+    padding: 0.5%;
+    display: inline-block;
+    cursor: pointer;
 }
