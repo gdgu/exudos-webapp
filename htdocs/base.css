@@ -113,6 +113,9 @@ div.foot {
     letter-spacing: 1px;
     color: #333;
 }
+div.foot a.projectlink {
+    text-transform: lowercase;
+}
 div.foot a:hover {
     text-decoration: none;
 }

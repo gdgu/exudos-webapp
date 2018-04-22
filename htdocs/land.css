@@ -23,6 +23,11 @@ body {
     margin-top: 4em;
 }
 
+span.home {
+    text-transform: uppercase;
+    font-size: 1.15em;
+}
+
 span.userblock {
     font-family: 'Oxygen', sans-serif;
     font-size: 0.8em;
