@@ -34,6 +34,10 @@ span.userblock {
     text-align: right;
 }
 
+span.userblock a.user {
+    cursor: pointer;
+}
+
 div.foot {
     background-color: rgba(0, 80, 155, 0.17);
 }
@@ -70,5 +74,4 @@ div.arrow {
     padding: 0.5%;
     transition: all 0.5s;
     display: inline-block;
-    cursor: pointer;
 }

@@ -7,11 +7,14 @@ var floatMenuItem = document.querySelector('div.floatmenu');
 // floatMenu item set display to none
 floatMenuItem.style.display = 'none';
 
-// floatMenu arrow span which will show toggle status of floatMenu section
+// floatMenu arrow span which will show transformable arrow
 var floatMenuArrowSpan = document.querySelector('span.userblock div.arrow');
 
+// floatMenu switch anchor which will toggle status of floatMenu section
+var floatMenuSwitch = document.querySelector('span.userblock a.user');
+
 // control toggle of floatMenu section
-floatMenuArrowSpan.onclick = function() {
+floatMenuSwitch.onclick = function() {
     // if floatMenu section is toggled off
     if(floatMenuFlag == false) {
         // floatMenu arrow span transform 180 deg to show inverted arrow
@@ -19,7 +22,7 @@ floatMenuArrowSpan.onclick = function() {
         // floatMenu item set display to on
         floatMenuItem.style.display = 'block';
         // floatMenu set text color as blue
-        this.style.color = '#09f';
+        this.style.color = '#ccc';
         // set floatMenu toggle flag
         floatMenuFlag = true;
     }
