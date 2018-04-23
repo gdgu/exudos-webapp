@@ -16,7 +16,6 @@ div.top.land {
 
 div.top.land span {
     display: inline-block;
-    width: 47%;
 }
 
 body {
@@ -24,14 +23,17 @@ body {
 }
 
 span.home {
+    display: block;
     text-transform: uppercase;
-    font-size: 1.15em;
+    font-size: 1.1em;
 }
 
 span.userblock {
+    display: block;
     font-family: 'Oxygen', sans-serif;
     font-size: 0.8em;
     text-align: right;
+    float: right;
 }
 
 span.userblock a.user {
@@ -48,7 +50,7 @@ div.floatmenu {
     position: fixed;
     top: 0;
     right: 1%;
-    margin-top: 3.7em;
+    margin-top: 4em;
     color: #fff;
     font-size: 0.8em;
 }
@@ -64,7 +66,7 @@ div.floatmenu ul.menu {
 }
 
 div.floatmenu ul.menu li {
-    padding: 5%;
+    padding: 1.3em;
     margin: 1%;
     text-align: center;
     background-color: rgba(0, 80, 155, 0.82);
@@ -74,4 +76,17 @@ div.arrow {
     padding: 0.5%;
     transition: all 0.5s;
     display: inline-block;
+}
+
+@media only screen and (max-width : 1100px) {
+    div.floatmenu {
+        width: 100%;
+        margin-top: 2.7em;
+    }
+    div.floatmenu ul.menu {
+        width: 98%;
+    }
+    div.floatmenu ul.menu li {
+        background-color: rgb(0, 80, 155);
+    }
 }
