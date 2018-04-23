@@ -73,7 +73,6 @@ div.floatmenu ul.menu li {
 }
 
 div.arrow {
-    padding: 0.5%;
     transition: all 0.5s;
     display: inline-block;
 }
