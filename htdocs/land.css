@@ -18,6 +18,72 @@ div.top.land span {
     display: inline-block;
 }
 
+/* menu bar */
+div.menubar {
+    position: fixed;
+    margin: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: rgba(50, 90, 130, 1);
+    box-shadow: 0 0 7px #000;
+}
+ul.tabs {
+    color: #fff;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    height: 3.6em;
+}
+ul.tabs li {
+    float: left;
+    margin: 0;
+    display: block;
+    width: 20vw;
+    text-align: center;
+    padding-top: 1em;
+    padding-bottom: 1em; 
+    font-size: 0.75em;
+    font-family: 'Oxygen', sans-serif;
+    text-transform: uppercase;
+    text-overflow: clip;
+}
+ul.tabs li#selected {
+    background-color: rgba(60, 100, 200, 0.9);
+}
+ul.tabs li:hover {
+    background-color: rgba(80, 90, 150, 0.9);
+}
+span.emoji {
+    font-size: 0.5em;
+    padding: 2%;
+}
+a.tabitem {
+    color: #fff;
+    text-decoration: none;
+}
+
+body {
+    margin-bottom: 3.6em;
+}
+
+/* conditional for mobile view */
+@media only screen and (min-width : 1100px) {
+    div.menubar {
+        position: fixed;
+        top: 3.5em;
+        height: 3.6em;
+    }
+    body {
+        margin-bottom: 0;
+    }
+    /* adjust body part 1 */
+    div.lay {
+        margin-top: 8.2em;
+    }
+}
+
+/* end menu bar */
+
 body {
     margin-top: 4em;
 }
@@ -69,7 +135,7 @@ div.floatmenu ul.menu li {
     padding: 1.3em;
     margin: 1%;
     text-align: center;
-    background-color: rgba(0, 80, 155, 0.82);
+    background-color: rgba(0, 80, 155, 0.97);
 }
 
 div.arrow {
