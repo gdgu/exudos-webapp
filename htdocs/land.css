@@ -128,6 +128,7 @@ div.floatmenu ul.menu {
     padding: 2%;
     width: 20vw;
     display: block;
+    background-color: rgba(255, 255, 255, 0.6);
 }
 
 div.floatmenu ul.menu li {
