@@ -24,7 +24,7 @@ div.menubar {
     margin: 0;
     bottom: 0;
     width: 100%;
-    background-color: rgba(50, 90, 130, 1);
+    background-color: rgba(50, 90, 130, 0.96);
     box-shadow: 0 0 7px #000;
 }
 ul.tabs {
@@ -42,10 +42,9 @@ ul.tabs li {
     text-align: center;
     padding-top: 1em;
     padding-bottom: 1em; 
-    font-size: 0.75em;
+    font-size: 0.8em;
     font-family: 'Oxygen', sans-serif;
-    text-transform: uppercase;
-    text-overflow: clip;
+    overflow: hidden;
 }
 ul.tabs li#selected {
     background-color: rgba(60, 100, 200, 0.9);
