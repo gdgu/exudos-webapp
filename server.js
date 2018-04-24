@@ -35,7 +35,9 @@ var startServer = (webroot, dynPages) => {
     var dynamicServer = new dynserver.Server(webroot, dynPages, dynsroot);
 
     // create a static file server
-    var fileServer = new static.Server(webroot);
+    var fileServer = new static.Server(webroot, {
+        cache: false
+    });
 
     // create the web server
     var httpServer = http.createServer((req, res) => {
