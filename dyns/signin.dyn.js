@@ -18,8 +18,8 @@ exports.servePage = (req, res, dataAndOptions) => {
             var lTokenB = currentUser.password;
 
             var lTokenCookieString = [
-                cookie.serialize('lTokenA', lTokenA, {httpOnly: true, maxAge: 24 * 60 * 60}),
-                cookie.serialize('lTokenB', lTokenB, {httpOnly: true, maxAge: 24 * 60 * 60}),                
+                cookie.serialize('lTokenA', lTokenA, {httpOnly: true, maxAge: 24 * 60 * 60 * 2}),
+                cookie.serialize('lTokenB', lTokenB, {httpOnly: true, maxAge: 24 * 60 * 60 * 2}),                
             ];
 
             console.log(lTokenCookieString);
