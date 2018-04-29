@@ -22,12 +22,47 @@
         </div>
         <div class="menubar">
             <ul class="tabs">
-                <a href="/landing.html" class="tabitem"><li><span class="emoji">📃</span><br>Assignments</li></a>
-                <a href="/landing.html" class="tabitem"><li><span class="emoji">💬</span><br>Chats</li></a>                                
-                <a href="/landing.html" class="tabitem"><li id="selected"><span class="emoji">📖</span><br>Courses</li></a>
-                <a href="/landing.html" class="tabitem"><li><span class="emoji">🔖</span><br>Evaluation</li></a>                
-                <a href="/landing.html" class="tabitem"><li><span class="emoji">📏</span><br>Feedback</li></a>
+                <a class="tabitem"><li><span class="emoji">📃</span><br>Assignments</li></a>
+                <a class="tabitem"><li><span class="emoji">💬</span><br>Forums</li></a>
+                <a class="tabitem"><li><span class="emoji">🔖</span><br>Evaluation</li></a>                                 
+                <a class="tabitem"><li id="selected"><span class="emoji">📖</span><br>Courses</li></a>               
+                <a class="tabitem"><li><span class="emoji">📏</span><br>Feedback</li></a>
             </ul>
+            <div class="submenuwrapper">
+                <div class="expanded" id="assignments">
+                    <ul class="submenu">
+                        <li id="createassignment"><a href="#" class="defaultcolor nouline ulineonhover">Create an Assignment</a></li>
+                        <li id="submitassignment"><a href="#" class="defaultcolor nouline ulineonhover">Submit an Assignment</a></li>
+                        <li id="listassignment"><a href="#" class="defaultcolor nouline ulineonhover">List of Assignments</a></li>                    
+                    </ul>
+                </div>
+                <div class="expanded" id="forums">
+                    <ul class="submenu">
+                        <li id="newchat"><a href="#" class="defaultcolor nouline ulineonhover">New Chat</a></li>
+                        <li id="messages"><a href="#" class="defaultcolor nouline ulineonhover">All Messages</a></li>
+                        <li id="notices"><a href="#" class="defaultcolor nouline ulineonhover">Notices</a></li>
+                        <li id="uploadnotice"><a href="#" class="defaultcolor nouline ulineonhover">Upload a Notice</a></li>                                         
+                    </ul>
+                </div><div class="expanded" id="evaluation">
+                    <ul class="submenu">
+                        <li id="assignmentfeedback"><a href="#" class="defaultcolor nouline ulineonhover">Internal Marks</a></li>
+                        <li id="facultyfeedback"><a href="#" class="defaultcolor nouline ulineonhover">Marks Report</a></li>
+                    </ul>
+                </div>
+                <div class="expanded" id="courses">
+                    <ul class="submenu">
+                        <li id="uploadcoursematerial"><a href="#" class="defaultcolor nouline ulineonhover">Upload Course Material</a></li>
+                        <li id="mycourses"><a href="#" class="defaultcolor nouline ulineonhover">My Courses</a></li>
+                        <li id="mytimetable"><a href="#" class="defaultcolor nouline ulineonhover">Time Table</a></li>                                        
+                    </ul>
+                </div>
+                <div class="expanded" id="feedback">
+                    <ul class="submenu">
+                        <li id="assignmentfeedback"><a href="#" class="defaultcolor nouline ulineonhover">Assignment Feedback</a></li>
+                        <li id="facultyfeedback"><a href="#" class="defaultcolor nouline ulineonhover">Faculty Feedback</a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
         <div class="floatmenu">
             <ul class="menu">
@@ -69,4 +104,5 @@
         </div>
     </body>
     <script src="/floatusermenu.js"></script>
+    <script src="/submenu.js"></script>
 </html>
