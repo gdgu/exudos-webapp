@@ -48,7 +48,7 @@ ul.tabs li {
     overflow: hidden;
     max-height: 2.6em;
 }
-ul.tabs li#selected {
+ul.tabs li.selected {
     background-color: rgba(60, 100, 200, 0.9);
 }
 ul.tabs li:hover {
