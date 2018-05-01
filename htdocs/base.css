@@ -1,6 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Oxygen');
 @import url('https://fonts.googleapis.com/css?family=Raleway');
 
+* {
+    transition: all 0.2s;
+}
+
 body {
     background-color: #fff;
     margin: 0;

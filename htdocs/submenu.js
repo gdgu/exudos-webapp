@@ -59,7 +59,7 @@ for(let index = 0; index < listOfMenuItems.length; index++) {
     expandedSubmenus.style.visibility = 'hidden';
 
     var navTabItem = document.querySelector('div.menubar ul.tabs li#' + menuId);
-    navTabItem.addEventListener('mouseover', function() {
+    navTabItem.addEventListener('click', function() {
         if(listOfMenuItems[index].togglestate) {
             hideAllSubmenus()
         }
