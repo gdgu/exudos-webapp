@@ -12,6 +12,16 @@ exports.servePage = (req, res, dataAndOptions) => {
         if(flag) {
             values.username = currentUser.username;
 
+            if(currentUser.faculty !== undefined) {
+                values.usertype = 'faculty';
+            }
+            else if(currentUser.student !== undefined) {
+                values.usertype = 'student';
+            }
+            else {
+                console.log("Error user type found in database!!");
+            }
+
             res.writeHead(200, dataAndOptions.httpHeaders);
             res.end(htmldynmodule.getHtmlStringWithIdValues(dataAndOptions.fileData, values), dataAndOptions.fileEncoding);
         }
