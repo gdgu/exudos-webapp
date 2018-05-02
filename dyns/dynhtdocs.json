@@ -29,5 +29,15 @@
         "encoding": "utf8",
         "type": "text/plain",
         "dynvalues": "/signout.dyn.js"
+    },
+    "/student/profile.html": {
+        "encoding": "utf8",
+        "type": "text/html",
+        "dynvalues": "/landing.dyn.js"
+    },
+    "/faculty/profile.html": {
+        "encoding": "utf8",
+        "type": "text/html",
+        "dynvalues": "/landing.dyn.js"
     }
 }

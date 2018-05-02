@@ -10,6 +10,9 @@ exports.servePage = (req, res, dataAndOptions) => {
 
     var callback1 = (flag, currentUser) => {
         if(flag) {
+
+            // true and authenticated yes case
+
             values.username = currentUser.username;
 
             if(currentUser.faculty !== undefined) {
