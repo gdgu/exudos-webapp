@@ -7,10 +7,6 @@ var querystring = require('querystring');
 var url = require('url');
 var path = require('path');
 var static = require('node-static');
-var cookie = require('cookie');
-
-var htmldyn = require('./lib/htmldyn/htmldynmodule');
-var dynserver = require('./lib/htmldyn/dynservermodule');
 
 // define webroot, dynsroot folder path
 const webroot = __dirname + '/htdocs';
@@ -30,22 +26,16 @@ fs.readFile(dynPagesFile, "utf8", (err, data) => {
 
 var startServer = (webroot, dynPages) => {
     // define the path to 404.html
-    const path404 = '/404';
-    // create a dynamic file server
-    var dynamicServer = new dynserver.Server(webroot, dynPages, dynsroot);
+    const path404 = '/404.html';
 
     // create a static file server
     var fileServer = new static.Server(webroot, {
         cache: false
     });
-
-    // create the web server
-    var httpServer = http.createServer((req, res) => {
+    
+    var requestHandler = (req, res) => {
 
         var bodyData = '';
-        var existingCookies = cookie.parse(
-            (req.headers.cookie) ? req.headers.cookie : ''
-        );
 
         // normalise path names to avoid issues
         req.url = path.normalize(req.url);
@@ -57,21 +47,29 @@ var startServer = (webroot, dynPages) => {
         });
         req.on('end', () => {
             var parsedUrl = url.parse(req.url);
+
+            var dynOptions = dynPages[parsedUrl.pathname];
             // dynamically serviceable resources
-            if(dynPages[parsedUrl.pathname] !== undefined) {
-                dynamicServer.serve(req, res, existingCookies, bodyData);
+            if(dynOptions !== undefined) {
+                var page = require(
+                    path.normalize(__dirname + '/dyns/' + dynOptions.dyn)
+                ).servePage(req, res, dynOptions, bodyData);
             }
+
             // static resources
             else {
                 fileServer.serve(req, res, (err) => {
                     if(err) {
-                        req.url = path404;
-                        dynamicServer.serve(req, res, existingCookies, bodyData);
+                        var dynOptions = dynPages['/404.html'];
+                        var page = require(path.normalize(__dirname + '/dyns/404.dyn.js')).servePage(req, res, dynOptions, bodyData);
                     }
                 });
             }
         }).resume();
-    });
+    }
+    
+    // create the web server
+    var httpServer = http.createServer(requestHandler);
 
     // define server port
     const port = process.env.PORT || 8080;

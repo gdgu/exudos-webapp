@@ -6,13 +6,20 @@ var dbConnect = require('../lib/db/dbconnect');
 
 const hashType = 'RSA-SHA';
 
-exports.servePage = (req, res, dataAndOptions) => {
-    var cookies = dataAndOptions.cookies;
+exports.servePage = (req, res, options, body) => {
+    // for http headers
+    var httpHeaders = {
+        'Content-Type': options.type
+    };
+    // parsing cookies
+    var cookies = cookie.parse(
+        (req.headers.cookie) ? req.headers.cookie : ''
+    );
 
-    var postParams = bodyparsermodule.parseHttpBody(dataAndOptions.httpBody);
+    var postParams = bodyparsermodule.parseHttpBody(body);
     console.log(postParams)
 
-    var callback1 = (flag, currentUser) => {
+    var afterAuth = (flag, currentUser) => {
         if(flag) {
             var lTokenA = currentUser._id.toString();
             var lTokenB = currentUser.password;
@@ -32,8 +39,8 @@ exports.servePage = (req, res, dataAndOptions) => {
             res.end('');
         }
         else {
-            dataAndOptions.httpHeaders['Location'] = '/?invalidUser';
-            res.writeHead(302, dataAndOptions.httpHeaders);
+            httpHeaders['Location'] = '/?invalidUser';
+            res.writeHead(302, httpHeaders);
             res.end('');
         }
     }
@@ -50,10 +57,10 @@ exports.servePage = (req, res, dataAndOptions) => {
                     passwordHash.update(postParams['password']);
                     var password = passwordHash.digest('hex');
 
-                    authenticateUser.authenticate(id, password, callback1);
+                    authenticateUser.authenticate(id, password, afterAuth);
                 }
                 else {
-                    callback1(false);
+                    afterAuth(false);
                 }
             });
         }
@@ -61,8 +68,8 @@ exports.servePage = (req, res, dataAndOptions) => {
     }
 
     else {
-        dataAndOptions.httpHeaders['Location'] = '/?invalidUser';
-        res.writeHead(302, dataAndOptions.httpHeaders);
+        httpHeaders['Location'] = '/?invalidUser';
+        res.writeHead(302, httpHeaders);
         res.end('');
     }
 }

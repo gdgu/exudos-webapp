@@ -1,43 +1,38 @@
 {
-    "/": {
-        "alias": "/index.html"
-    },
-    "/index.html": {
+    "/":  {
         "encoding": "utf8",
         "type": "text/html",
-        "dynvalues": "/index.dyn.js"
+        "dyn": "/index.dyn.js",
+        "filepath": "htdocs/index.html"
     },
-    "/404": {
-        "alias": "/404.html"
+    "/index.html":  {
+        "encoding": "utf8",
+        "type": "text/html",
+        "dyn": "/index.dyn.js",
+        "filepath": "htdocs/index.html"
     },
     "/404.html": {
         "encoding": "utf8",
         "type": "text/html",
-        "dynvalues": "/index.dyn.js"
+        "dyn": "/index.dyn.js",
+        "filepath": "htdocs/404.html"
     },
     "/landing.html": {
         "encoding": "utf8",
         "type": "text/html",
-        "dynvalues": "/landing.dyn.js"
+        "dyn": "/landing.dyn.js",
+        "filepath": "htdocs/landing.html"
     },
     "/signin.do": {
         "encoding": "utf8",
         "type": "text/plain",
-        "dynvalues": "/signin.dyn.js"
+        "dyn": "/signin.dyn.js",
+        "filepath": "htdocs/signin.do"
     },
     "/signout.do": {
         "encoding": "utf8",
         "type": "text/plain",
-        "dynvalues": "/signout.dyn.js"
-    },
-    "/student/profile.html": {
-        "encoding": "utf8",
-        "type": "text/html",
-        "dynvalues": "/landing.dyn.js"
-    },
-    "/faculty/profile.html": {
-        "encoding": "utf8",
-        "type": "text/html",
-        "dynvalues": "/landing.dyn.js"
+        "dyn": "/signout.dyn.js",
+        "filepath": "htdocs/signout.do"
     }
 }

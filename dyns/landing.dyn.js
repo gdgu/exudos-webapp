@@ -4,44 +4,51 @@ var htmldynmodule = require('../lib/htmldyn/htmldynmodule');
 
 var authenticateUser = require('../lib/bl/authenticateuser');
 
-exports.servePage = (req, res, dataAndOptions) => {
-    var cookies = dataAndOptions.cookies;
+exports.servePage = (req, res, options) => {
+
+    // for http headers
+    var httpHeaders = {
+        'Content-Type': options.type
+    };
+    // parsing cookies
+    var cookies = cookie.parse(
+        (req.headers.cookie) ? req.headers.cookie : ''
+    );
+    // custom set of default values used by all pages
     var values = JSON.parse(fs.readFileSync('dyns/globalvars.json', 'utf8'));
 
-    var callback1 = (flag, currentUser) => {
-        if(flag) {
-
-            // true and authenticated yes case
-
-            values.username = currentUser.username;
-
-            if(currentUser.faculty !== undefined) {
-                values.usertype = 'faculty';
-            }
-            else if(currentUser.student !== undefined) {
-                values.usertype = 'student';
+    if(cookies['lTokenA'] !== undefined && cookies['lTokenB'] !== undefined) {
+        authenticateUser.authenticate(cookies['lTokenA'], cookies['lTokenB'], (flag, currentUser) => {
+            if(flag) {
+                // true and authenticated yes case
+                values.username = currentUser.username;
+    
+                // set the type of user
+                if(currentUser.faculty !== undefined) {
+                    values.usertype = 'faculty';
+                }
+                else if(currentUser.student !== undefined) {
+                    values.usertype = 'student';
+                }
+                else {
+                    console.log("Error user type found in database!!");
+                }
+    
+                res.writeHead(200, httpHeaders);
+                fs.readFile(options.filepath, options.encoding, (err, data) => {
+                    res.end(htmldynmodule.getHtmlStringWithIdValues(data, values), options.encoding);
+                });
             }
             else {
-                console.log("Error user type found in database!!");
+                httpHeaders['Location'] = '/?signinFirst';
+                res.writeHead(302, httpHeaders);
+                res.end('');
             }
-
-            res.writeHead(200, dataAndOptions.httpHeaders);
-            res.end(htmldynmodule.getHtmlStringWithIdValues(dataAndOptions.fileData, values), dataAndOptions.fileEncoding);
-        }
-        else {
-            dataAndOptions.httpHeaders['Location'] = '/?signinFirst';
-            res.writeHead(302, dataAndOptions.httpHeaders);
-            res.end('');
-        }
+        });
     }
-
-    if(cookies['lTokenA'] !== undefined && cookies['lTokenB'] !== undefined) {
-        authenticateUser.authenticate(cookies['lTokenA'], cookies['lTokenB'], callback1);
-    }
-
     else {
-        dataAndOptions.httpHeaders['Location'] = '/?signinFirst';
-        res.writeHead(302, dataAndOptions.httpHeaders);
+        httpHeaders['Location'] = '/?signinFirst';
+        res.writeHead(302, httpHeaders);
         res.end('');
     }
 }

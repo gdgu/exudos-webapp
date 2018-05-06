@@ -2,8 +2,7 @@ var cookie = require('cookie');
 
 const hashType = 'RSA-SHA';
 
-exports.servePage = (req, res, dataAndOptions) => {
-    var cookies = dataAndOptions.cookies;
+exports.servePage = (req, res) => {
 
     var lTokenCookieString = [
         cookie.serialize('lTokenA', '', {httpOnly: true, maxAge: 0}),
