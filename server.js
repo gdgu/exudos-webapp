@@ -45,14 +45,16 @@ var startServer = (webroot, dynPages) => {
             if(bodyData.length > 1e6) req.connection.destroy();
             else bodyData += chunk;
         });
+
         req.on('end', () => {
             var parsedUrl = url.parse(req.url);
 
             var dynOptions = dynPages[parsedUrl.pathname];
+
             // dynamically serviceable resources
             if(dynOptions !== undefined) {
                 var page = require(
-                    path.normalize(__dirname + '/dyns/' + dynOptions.dyn)
+                    path.normalize(__dirname + '/' + dynOptions.dyn)
                 ).servePage(req, res, dynOptions, bodyData);
             }
 
@@ -60,8 +62,10 @@ var startServer = (webroot, dynPages) => {
             else {
                 fileServer.serve(req, res, (err) => {
                     if(err) {
-                        var dynOptions = dynPages['/404.html'];
-                        var page = require(path.normalize(__dirname + '/dyns/404.dyn.js')).servePage(req, res, dynOptions, bodyData);
+                        var dynOptions = dynPages[path404];
+                        var page = require(
+                            path.normalize(__dirname + '/' + dynOptions.dyn)
+                        ).servePage(req, res, dynOptions, bodyData);
                     }
                 });
             }
