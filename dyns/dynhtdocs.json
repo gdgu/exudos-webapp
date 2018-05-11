@@ -34,5 +34,17 @@
         "type": "text/plain",
         "dyn": "dyns/signout.dyn.js",
         "filepath": "htdocs/signout.do"
+    },
+    "/student/index.html": {
+        "encoding": "utf8",
+        "type": "text/html",
+        "dyn": "dyns/student/index.dyn.js",
+        "filepath": "htdocs/student/index.html"
+    },
+    "/faculty/index.html": {
+        "encoding": "utf8",
+        "type": "text/html",
+        "dyn": "dyns/faculty/index.dyn.js",
+        "filepath": "htdocs/faculty/index.html"
     }
 }
