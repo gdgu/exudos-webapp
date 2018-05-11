@@ -30,11 +30,11 @@ exports.servePage = (req, res, options, body) => {
             ];
 
             console.log(lTokenCookieString);
-
+            
             res.writeHead(302, [
                 ['Set-Cookie', lTokenCookieString[0]],
                 ['Set-Cookie', lTokenCookieString[1]],
-                ['Location', '/landing.html']
+                ['Location', '/landing.do']
             ]);
             res.end('');
         }

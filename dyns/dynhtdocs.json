@@ -17,11 +17,11 @@
         "dyn": "dyns/index.dyn.js",
         "filepath": "htdocs/404.html"
     },
-    "/landing.html": {
+    "/landing.do": {
         "encoding": "utf8",
         "type": "text/html",
         "dyn": "dyns/landing.dyn.js",
-        "filepath": "htdocs/landing.html"
+        "filepath": "htdocs/landing.do"
     },
     "/signin.do": {
         "encoding": "utf8",
