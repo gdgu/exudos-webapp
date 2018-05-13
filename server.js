@@ -26,7 +26,7 @@ fs.readFile(dynPagesFile, "utf8", (err, data) => {
 
 var startServer = (webroot, dynPages) => {
     // define the path to 404.html
-    const path404 = '/404.html';
+    const path404 = '/error.html';
 
     // create a static file server
     var fileServer = new static.Server(webroot, {
@@ -63,9 +63,13 @@ var startServer = (webroot, dynPages) => {
                 fileServer.serve(req, res, (err) => {
                     if(err) {
                         var dynOptions = dynPages[path404];
+                        var errorDescription = {
+                            code: 404,
+                            message: 'This is not the page that you\'re looking for.'
+                        }
                         var page = require(
                             path.normalize(__dirname + '/' + dynOptions.dyn)
-                        ).servePage(req, res, dynOptions, bodyData);
+                        ).servePage(req, res, dynOptions, bodyData, errorDescription);
                     }
                 });
             }

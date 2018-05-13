@@ -2,7 +2,8 @@ const userType = 'faculty'
 
 var fs = require('fs')
 
-var auth = require('../auth.dyn')
+var auth = require('../auth')
+var wrongUserType = require('../wrongusertype.dyn')
 
 var htmldynmodule = require('../../lib/htmldyn/htmldynmodule')
 
@@ -11,11 +12,8 @@ exports.servePage = (req, res, options) => {
 
         if(userType !== currentUserType) {
 
-            res.writeHead(302, {
-                'Location': '/landing.do'
-            })
-            res.end()
-            
+            wrongUserType.servePage(req, res)
+
             return
         }
 

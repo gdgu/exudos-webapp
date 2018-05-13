@@ -1,12 +1,19 @@
 var fs = require('fs');
-var htmldynmodule = require('../lib/htmldyn/htmldynmodule');
-var bodyparsermodule = require('../lib/htmldyn/bodyparsermodule');
-var url = require('url');
 
-exports.servePage = (req, res, options) => {
+var htmldynmodule = require('../lib/htmldyn/htmldynmodule');
+
+exports.servePage = (req, res, options, body, error) => {
+
+    // fall through
+    if(error == undefined) error = {
+        message: 'No error occured.',
+        code: 0
+    }
 
     // custom set of default values used by all pages
     var values = JSON.parse(fs.readFileSync('dyns/globalvars.json', 'utf8'));
+    values.errormessage = error.message
+    values.errorcode = error.code
 
     res.writeHead(404, {
         'Content-Type': options.type
