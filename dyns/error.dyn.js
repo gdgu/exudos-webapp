@@ -15,7 +15,7 @@ exports.servePage = (req, res, options, body, error) => {
     values.errormessage = error.message
     values.errorcode = error.code
 
-    res.writeHead(404, {
+    res.writeHead(error.code, {
         'Content-Type': options.type
     });
     
