@@ -15,7 +15,9 @@ exports.servePage = (req, res, options, body, error) => {
     values.errormessage = error.message
     values.errorcode = error.code
 
-    res.writeHead(error.code, {
+    var httpStatusCode = (error.code == 0) ? 200 : error.code
+
+    res.writeHead(httpStatusCode, {
         'Content-Type': options.type
     });
     

@@ -47,6 +47,7 @@ function hideAllSubmenus() {
         let expandedSubmenus = document.querySelector('div.expanded#' + menuId);
         if(listOfMenuItems[index].togglestate) {
             expandedSubmenus.style.visibility = 'hidden';
+            expandedSubmenus.style.opacity = 0;
             listOfMenuItems[index].togglestate = false;
         }
     }
@@ -55,8 +56,9 @@ function hideAllSubmenus() {
 for(let index = 0; index < listOfMenuItems.length; index++) {
     var menuId = listOfMenuItems[index].id;
     let expandedSubmenus = document.querySelector('div.expanded#' + menuId);
-    // set their visibility to hidden by default
+    // set their visibility to hidden, opacity to 0 by default
     expandedSubmenus.style.visibility = 'hidden';
+    expandedSubmenus.style.opacity = 0;
 
     var navTabItem = document.querySelector('div.menubar ul.tabs li#' + menuId);
     navTabItem.addEventListener('click', function() {
@@ -66,6 +68,7 @@ for(let index = 0; index < listOfMenuItems.length; index++) {
         else {
             hideAllSubmenus()
             expandedSubmenus.style.visibility = '';
+            expandedSubmenus.style.opacity = '';            
 
             listOfMenuItems[index].togglestate = !listOfMenuItems[index].togglestate;
         }
