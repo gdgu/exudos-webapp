@@ -3,7 +3,6 @@
 // import the required modules
 var http = require('http');
 var fs = require('fs');
-var querystring = require('querystring');
 var url = require('url');
 var path = require('path');
 var static = require('node-static');

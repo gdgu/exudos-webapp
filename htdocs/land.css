@@ -38,7 +38,7 @@ ul.tabs li {
     float: left;
     margin: 0;
     display: block;
-    width: 20vw;
+    width: 19.8vw;
     text-align: center;
     padding-top: 1em;
     padding-bottom: 1em; 
@@ -84,7 +84,7 @@ body {
 /* expanded sub menu */
 div.expanded {
     transition: all 0s;
-    width: 20vw;
+    width: 19.8vw;
     float: left;
     margin: 0;
     padding: 0;
@@ -172,7 +172,7 @@ div.floatmenu ul.menu {
     margin-right: 0;
     text-align: left;
     padding: 2%;
-    width: 20vw;
+    width: 19.8vw;
     display: block;
     background-color: rgba(255, 255, 255, 0.6);
 }
