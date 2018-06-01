@@ -83,5 +83,5 @@ var startServer = (webroot, dynPages) => {
 
     // make server listen to port
     httpServer.listen(port);
-    console.log('Started server at port ' + port);
+    console.log(new Date().toDateString() + ', ' + new Date().toTimeString() + ': Started server at port ' + port);
 }
