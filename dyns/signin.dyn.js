@@ -52,6 +52,8 @@ exports.servePage = (req, res, options, body) => {
         var dbTaskToGetUserId = (err, dbL) => {
             var db = dbL.db();
             db.collection('users').findOne({username: postParams['username']}, (err, res) => {
+                dbL.close();
+
                 if(res !== undefined && res !== null) {
                     var id = res._id.toString();
                     // get password hash for given string
