@@ -34,6 +34,9 @@ var startServer = (webroot, dynPages) => {
     
     var requestHandler = (req, res) => {
 
+        // log the uri which has been requested
+        console.log('[' + new Date().toISOString() + ']: ' + req.method + ' ' + req.url)
+
         var bodyData = '';
 
         // normalise path names to avoid issues
