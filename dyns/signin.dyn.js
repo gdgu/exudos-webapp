@@ -48,27 +48,13 @@ exports.servePage = (req, res, options, body) => {
     }
 
     if(postParams['username'] !== undefined && postParams['password'] !== undefined) {
-        // get user's id based on username
-        var dbTaskToGetUserId = (err, dbL) => {
-            var db = dbL.db();
-            db.collection('users').findOne({username: postParams['username']}, (err, res) => {
-                dbL.close();
 
-                if(res !== undefined && res !== null) {
-                    var id = res._id.toString();
-                    // get password hash for given string
-                    var passwordHash = crypto.createHash(hashType)
-                    passwordHash.update(postParams['password']);
-                    var password = passwordHash.digest('hex');
+        var username = postParams['username']
+        var passwordHash = crypto.createHash(hashType)
+        passwordHash.update(postParams['password']);
+        var hashedPassword = passwordHash.digest('hex');
 
-                    authenticateUser.authenticate(id, password, afterAuth);
-                }
-                else {
-                    afterAuth(false);
-                }
-            });
-        }
-        dbConnect(dbTaskToGetUserId);
+        authenticateUser.verifyCredentials(username, hashedPassword, afterAuth)
     }
 
     else {
