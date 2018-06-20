@@ -25,6 +25,7 @@ div.menubar {
     width: 100%;
     background-color: rgba(25, 58, 92, 0.95);
     box-shadow: 0 0 1em rgba(25, 58, 92, 0.88);
+    text-align: center;
 }
 ul.tabs {
     color: #fff;
@@ -33,12 +34,13 @@ ul.tabs {
     padding: 0;
     height: 3.6em;
     text-transform: uppercase;
+    display: inline-block;
 }
 ul.tabs li {
     float: left;
     margin: 0;
     display: block;
-    width: 19.8vw;
+    width: 18.5vw;
     text-align: center;
     padding-top: 1em;
     padding-bottom: 1em; 
@@ -82,9 +84,15 @@ body {
 /* end menu bar */
 
 /* expanded sub menu */
+div.submenuwrapper {
+    text-align: center;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+}
 div.expanded {
     transition: all 0s;
-    width: 19.8vw;
+    width: 18.5vw;
     float: left;
     margin: 0;
     padding: 0;
@@ -92,6 +100,7 @@ div.expanded {
     font-size: 0.75em;
     /* disable transition for visibilty  */
     transition: visibility 0s;
+    /* display: inline-block; */
 }
 
 div.expanded * {
@@ -119,6 +128,9 @@ div.expanded ul.submenu li {
 
 /* conditional mobile view*/
 @media only screen and (max-width : 1100px) {
+    div.submenuwrapper {
+        display: initial;
+    }
     div.expanded ul.submenu {
         position: fixed;
         bottom: 4.8em;
@@ -157,7 +169,6 @@ div.foot {
 
 div.floatmenu {
     font-family: 'Oxygen', sans-serif;
-    display: block;
     position: fixed;
     top: 0;
     right: 1%;
@@ -172,7 +183,7 @@ div.floatmenu ul.menu {
     margin-right: 0;
     text-align: left;
     padding: 2%;
-    width: 19.8vw;
+    width: 18.5vw;
     display: block;
     background-color: rgba(255, 255, 255, 0.6);
 }
