@@ -58,5 +58,11 @@
         "type": "text/html",
         "dyn": "dyns/faculty/index.dyn.js",
         "filepath": "htdocs/faculty/index.html"
+    },
+    "/faculty/uploadnotice.html": {
+        "encoding": "utf8",
+        "type": "text/html",
+        "dyn": "dyns/faculty/index.dyn.js",
+        "filepath": "htdocs/faculty/uploadnotice.html"
     }
 }

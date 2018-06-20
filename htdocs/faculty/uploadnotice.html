@@ -11,6 +11,7 @@
         
         <link rel="stylesheet" href="/land.css" type="text/css" />
         <link rel="stylesheet" href="/cards.css" type="text/css" />
+        <link rel="stylesheet" href="/forms.css" type="text/css" />
     </head>
 
     <body>
@@ -71,13 +72,22 @@
         </div>
         <div class="lay">
             <div class="overlay">
-                <small>Hi</small>, $$ username $$! 👾
+                Please put in the notice information underneath.
             </div>
         </div>
         <div class="content">
-            <table id="news">
-                
-            </table>
+            <div class="formholder">
+                <form class="forms" id="uploadnotice" action="uploadnoticesubmit.html" method="POST">
+                    <label for="description">Description <sup class="red">*</sup></label>
+                    <input type="text" name="description" placeholder="Describe your notice.." required="required" /><br>
+                    <label for="document">Document</label>
+                    <input type="text" name="document" placeholder="Document you'd like to attach.." />
+                    <small class="note">
+                        Fields marked with <span class="red">*</span> indicates that they are required.
+                    </small>
+                    <button type="submit"> post </button>
+                </form>
+            </div>
         </div>
         <div class="foot">
             <small><a href="#" class="defaultcolor">report-bug</a> | <a href="#" class="defaultcolor">reset-password</a> | <a href="#" class="defaultcolor">suggest-feature</a> | <a href="#" class="defaultcolor">contact-us</a></small><br><a href="/" class="nouline defaultcolor projectlink">$$ projectname $$ <small>project</a></small>.<br><br>
