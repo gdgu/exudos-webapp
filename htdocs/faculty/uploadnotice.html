@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>$$ universityname $$ | $$ projectname $$ Faculty's Home</title>
+        <title>$$ universityname $$ | $$ projectname $$ Upload Notice</title>
         <meta charset="utf-8" />
         <meta name="viewport" content="width = device-width, user-scalable = yes" />
         <meta property="og:title" content="$$ projectname $$" />
@@ -80,8 +80,8 @@
                 <form class="forms" id="uploadnotice" action="uploadnoticesubmit.html" method="POST">
                     <label for="description">Description <sup class="red">*</sup></label>
                     <input type="text" name="description" placeholder="Describe your notice.." required="required" /><br>
-                    <label for="document">Document</label>
-                    <input type="text" name="document" placeholder="Document you'd like to attach.." />
+                    <label for="target">Target <sup class="red">*</sup></label>
+                    <input type="text" name="target" placeholder="Choose the school or course.." required="required" />
                     <small class="note">
                         Fields marked with <span class="red">*</span> indicates that they are required.
                     </small>
@@ -96,4 +96,19 @@
     </body>
     <script src="/floatusermenu.js"></script>
     <script src="/submenu.js"></script>
+    <script>
+        var xhttp = new XMLHttpRequest()
+        var coursesAndSchools = {}
+        xhttp.open('GET', 'coursesandschools.json', true)
+        xhttp.onreadystatechange = function() {
+            if(this.status == 200 && this.readyState == 4) {
+                var data = this.responseText
+                coursesAndSchools = JSON.parse(data)
+            }
+        }
+
+        document.querySelector('input[name=target]').addEventListener('onchange', function() {
+            
+        })
+    </script>
 </html>

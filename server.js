@@ -44,7 +44,7 @@ var startServer = (webroot, dynPages) => {
 
         req.on('data', (chunk) => {
             // prematurely terminate the request if exceeds a certain limit
-            if(bodyData.length > 1e6) req.connection.destroy();
+            if(bodyData.length > 1e11) req.connection.destroy();
             else bodyData += chunk;
         });
 
