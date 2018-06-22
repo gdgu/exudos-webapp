@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>$$ universityname $$ | $$ projectname $$ Student's Home</title>
+        <title>$$ universityname $$ | $$ projectname $$ Submit Assignment</title>
         <meta charset="utf-8" />
         <meta name="viewport" content="width = device-width, user-scalable = yes" />
         <meta property="og:title" content="$$ projectname $$" />
@@ -10,7 +10,8 @@
         <link rel="stylesheet" href="/base.css" type="text/css" />
         
         <link rel="stylesheet" href="/land.css" type="text/css" />
-        <link rel="stylesheet" href="/cards.css" type="text/css" />
+        <!-- <link rel="stylesheet" href="/cards.css" type="text/css" /> -->
+        <link rel="stylesheet" href="/forms.css" type="text/css" />
     </head>
 
     <body>
@@ -68,30 +69,22 @@
         </div>
         <div class="lay">
             <div class="overlay">
-                <small>Hi</small>, $$ username $$! 👾
+                Please put in the assignment details underneath.
             </div>
         </div>
         <div class="content">
-            <table id="news">
-                <tr class="card">
-                    <td class="title">
-                        <small>posted by</small> 👥 some.faculty <small>for</small> some.course
-                    </td>
-                    <td class="content">
-                        <h3>This is a notice maybe!</h3><br>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam atque nisi ut quas debitis sed provident ratione laboriosam, voluptatum vero alias quis reprehenderit ipsa beatae accusantium! Sed cum reprehenderit sequi!
-                    </td>
-                </tr>
-                <tr class="card">
-                    <td class="title">
-                        <small>posted by</small> 👥 test.faculty <small>for</small> another.course
-                    </td>
-                    <td class="content">
-                        <h3>This is another notice maybe!</h3><br>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam atque nisi ut quas debitis sed provident ratione laboriosam, voluptatum vero alias quis reprehenderit ipsa beatae accusantium! Sed cum reprehenderit sequi!
-                    </td>
-                </tr>
-            </table>
+            <div class="formholder">
+                <form method="POST">
+                    <label for="description">Description <sup class="red">*</sup></label>
+                    <input type="text" name="description" placeholder="Describe your assignment.." required="required" /><br>
+                    <label for="target">Target <sup class="red">*</sup></label>
+                    <input type="text" name="target" placeholder="Choose the course.." required="required" />
+                    <small class="note">
+                        Fields marked with <span class="red">*</span> indicates that they are required.
+                    </small>
+                    <button type="submit"> submit </button>
+                </form>
+            </div>
         </div>
         <div class="foot">
             <small><a href="#" class="defaultcolor">report-bug</a> | <a href="#" class="defaultcolor">reset-password</a> | <a href="#" class="defaultcolor">suggest-feature</a> | <a href="#" class="defaultcolor">contact-us</a></small><br><a href="/" class="nouline defaultcolor projectlink">$$ projectname $$ <small>project</a></small>.<br><br>

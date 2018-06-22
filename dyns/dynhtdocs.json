@@ -47,6 +47,12 @@
         "dyn": "dyns/student/index.dyn.js",
         "filepath": "htdocs/student/index.html"
     },
+    "/student/submitassignment.html": {
+        "encoding": "utf8",
+        "type": "text/html",
+        "dyn": "dyns/student/index.dyn.js",
+        "filepath": "htdocs/student/submitassignment.html"
+    },
     "/faculty/": {
         "encoding": "utf8",
         "type": "text/html",
