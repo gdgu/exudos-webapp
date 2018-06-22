@@ -64,5 +64,17 @@
         "type": "text/html",
         "dyn": "dyns/faculty/index.dyn.js",
         "filepath": "htdocs/faculty/uploadnotice.html"
+    },
+    "/faculty/createassignment.html": {
+        "encoding": "utf8",
+        "type": "text/html",
+        "dyn": "dyns/faculty/index.dyn.js",
+        "filepath": "htdocs/faculty/createassignment.html"
+    },
+    "/faculty/uploadcoursematerial.html": {
+        "encoding": "utf8",
+        "type": "text/html",
+        "dyn": "dyns/faculty/index.dyn.js",
+        "filepath": "htdocs/faculty/uploadcoursematerial.html"
     }
 }
