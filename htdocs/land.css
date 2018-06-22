@@ -212,3 +212,14 @@ div.arrow {
         background-color: rgb(0, 80, 155);
     }
 }
+
+/* for use with disabled features */
+ul.submenu li.disabledfeature {
+    text-decoration: line-through;
+}
+ul.submenu li.disabledfeature a {
+    cursor: default;
+}
+ul.submenu li.disabledfeature a:hover {
+    text-decoration: none;
+}

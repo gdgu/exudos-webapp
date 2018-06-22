@@ -5,6 +5,7 @@ var listOfMenuItems = [
         submenu: [
             'createassignment', 'submitassignment', 'listassignment'
         ],
+        disabled: [],
         togglestate: false
     },
     {
@@ -12,6 +13,9 @@ var listOfMenuItems = [
         title: 'Forum',
         submenu: [
             'newchat', 'messages', 'notices', 'uploadnotice'
+        ],
+        disabled: [
+            'newchat', 'messages'
         ],
         togglestate: false
     },
@@ -21,6 +25,7 @@ var listOfMenuItems = [
         submenu: [
             'internalmarks', 'marksreport'
         ],
+        disabled: [],
         togglestate: false
     },
     {
@@ -29,12 +34,18 @@ var listOfMenuItems = [
         submenu: [
             'uploadcoursematerial', 'mycourses', 'mytimetable'
         ],
+        disabled: [
+            'mytimetable'
+        ],
         togglestate: false
     },
     {
         id: 'feedback',
         title: 'Feedback',
         submenu: [
+            'assignmentfeedback', 'facultyfeedback'
+        ],
+        disabled: [
             'assignmentfeedback', 'facultyfeedback'
         ],
         togglestate: false
@@ -73,4 +84,15 @@ for(let index = 0; index < listOfMenuItems.length; index++) {
             listOfMenuItems[index].togglestate = !listOfMenuItems[index].togglestate;
         }
     });
+}
+
+// disabledfeatures class toggle
+for(var anIndex = 0; anIndex < listOfMenuItems.length; anIndex++) {
+    for(var anotherIndex = 0; anotherIndex < listOfMenuItems[anIndex].disabled.length; anotherIndex++) {
+        var disabledId = listOfMenuItems[anIndex].disabled[anotherIndex]
+        var element = document.querySelector('li#' + disabledId)
+        if(element) {
+            element.className = 'disabledfeature'
+        }
+    }
 }
