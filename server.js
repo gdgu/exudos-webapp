@@ -7,9 +7,14 @@ var url = require('url');
 var path = require('path');
 var static = require('node-static');
 
+var documentServer = require('./documentserver')
+
 // define webroot, dynsroot folder path
 const webroot = __dirname + '/htdocs';
 const dynsroot = __dirname + '/dyns';
+
+// define documents storage path
+const docsPath = '/documents/';
 
 // populate the list of dynamically serviceable pages
 const dynPagesFile = __dirname + '/dyns/dynhtdocs.json';
@@ -58,6 +63,12 @@ var startServer = (webroot, dynPages) => {
                 var page = require(
                     path.normalize(__dirname + '/' + dynOptions.dyn)
                 ).servePage(req, res, dynOptions, bodyData);
+            }
+
+            // documents from database
+
+            else if(parsedUrl.pathname.startsWith(docsPath)) {
+                var page = documentServer.servePage(req, res, dynPages[path404])
             }
 
             // static resources
