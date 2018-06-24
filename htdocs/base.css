@@ -100,7 +100,7 @@ input[type=submit] {
     background-color: rgba(0, 0, 0, 0);
     box-shadow: 0 0 1px #999;
     border: 2px solid #999;
-    margin-bottom: 5%;
+    margin: 2%;
 }
 input[type=submit]:hover {
     background-color: #aaa;
@@ -109,6 +109,10 @@ input[type=submit]:hover {
 }
 input[type=submit]:disabled:hover {
     background-color: rgba(0, 0, 0, 0);
+}
+small.passwordreset {
+    display: block;
+    margin-bottom: 5%;
 }
 div.foot {
     max-width: 100%;
