@@ -53,6 +53,12 @@
         "dyn": "dyns/student/index.dyn.js",
         "filepath": "htdocs/student/submitassignment.html"
     },
+    "/student/notices.html": {
+        "encoding": "utf8",
+        "type": "text/html",
+        "dyn": "dyns/student/index.dyn.js",
+        "filepath": "htdocs/student/notices.html"
+    },
     "/faculty/": {
         "encoding": "utf8",
         "type": "text/html",
@@ -82,5 +88,11 @@
         "type": "text/html",
         "dyn": "dyns/faculty/index.dyn.js",
         "filepath": "htdocs/faculty/uploadcoursematerial.html"
+    },
+    "/faculty/notices.html": {
+        "encoding": "utf8",
+        "type": "text/html",
+        "dyn": "dyns/faculty/index.dyn.js",
+        "filepath": "htdocs/faculty/notices.html"
     }
 }
