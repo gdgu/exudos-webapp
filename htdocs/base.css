@@ -60,6 +60,11 @@ div.overlay {
     font-size: 1.2em;
     font-family: 'Oxygen', serif;
 }
+div.overlay.head {
+    text-align: left;
+    font-size: 2.0em;
+    letter-spacing: 5px;
+}
 img.github:hover {
     background-color: #ccc;
     border-radius: 50%;
