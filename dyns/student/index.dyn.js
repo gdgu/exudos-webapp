@@ -13,7 +13,7 @@ exports.servePage = (req, res, options) => {
         if(userType !== currentUserType) {
 
             wrongUserType.servePage(req, res)
-            
+
             return
         }
 
@@ -21,15 +21,20 @@ exports.servePage = (req, res, options) => {
 
         values.username = currentUser.username
         values.usertype = userType
+        values.pagetitle = "Student's Home"
 
         res.writeHead(200, {
             'Content-Type': options.type
         })
 
-        fs.readFile(options.filepath, options.encoding, (err, data) => {
-            res.end(
-                htmldynmodule.getHtmlStringWithIdValues(data, values)
-            )
+        fs.readFile(__dirname + '/template.html', 'utf8', (err, templateHtml) => {
+            fs.readFile(options.filepath, options.encoding, (err, viewHtml) => {
+                values.content = viewHtml
+
+                res.end(
+                    htmldynmodule.getHtmlStringWithIdValues(templateHtml, values)
+                )
+            })
         })
 
     })
