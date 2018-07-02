@@ -39,8 +39,11 @@ div.top span {
     padding: 1%;
     display: block;
 }
-div.top span code {
+div.top span .side {
     text-transform: lowercase;
+    font-family: 'Oxygen', monospace;
+    font-size: 0.9em;
+    color: rgb(5, 148, 255);
 }
 div.errormsg {
     color: #fff;
