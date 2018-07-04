@@ -3,7 +3,11 @@ var htmldynmodule = require('../lib/htmldyn/htmldynmodule');
 var bodyparsermodule = require('../lib/htmldyn/bodyparsermodule');
 var url = require('url');
 
-exports.servePage = (req, res, options) => {
+exports.filePath = ''
+
+exports.servePage = (req, res, body) => {
+
+    var filePath = exports.filePath
 
     // custom set of default values used by all pages
     var values = JSON.parse(fs.readFileSync('dyns/globalvars.json', 'utf8'));
@@ -25,10 +29,10 @@ exports.servePage = (req, res, options) => {
     }
 
     res.writeHead(200, {
-        'Content-Type': options.type
+        'Content-Type': 'text/html'
     });
     
-    fs.readFile(options.filepath, options.encoding, (err, data) => {
-        res.end(htmldynmodule.getHtmlStringWithIdValues(data, values), options.encoding);
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        res.end(htmldynmodule.getHtmlStringWithIdValues(data, values), 'utf8');
     });
 }

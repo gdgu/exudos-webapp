@@ -28,7 +28,7 @@ fs.readFile(dynPagesFile, "utf8", (err, data) => {
     startServer(webroot, dynPagesList);
 });
 
-var serviceDynamicPage = (req, res, bodyData) => {
+var serviceDynamicPage = (req, res, body) => {
 
     var currentPathname = url.parse(req.url).pathname
 
@@ -36,14 +36,11 @@ var serviceDynamicPage = (req, res, bodyData) => {
         currentPathname = path.join(currentPathname, 'index.html')
     }
 
-    var options = {
-        encoding: 'utf8',
-        type: 'text/html',
-        dyn: path.join(dynsroot, currentPathname.substring(0, currentPathname.lastIndexOf('.')) + '.dyn.js'),
-        filepath: path.join(webroot, currentPathname)
-    }
+    var dyn = path.join(dynsroot, currentPathname.substring(0, currentPathname.lastIndexOf('.')) + '.dyn.js')
     
-    var page = require(options.dyn).servePage(req, res, options, bodyData);
+    var page = require(dyn)
+    page.filePath = path.join(webroot, currentPathname)
+    page.servePage(req, res, body)
 }
 
 var startServer = (webroot, dynPagesList) => {
@@ -60,15 +57,15 @@ var startServer = (webroot, dynPagesList) => {
         // log the uri which has been requested
         console.log('[' + new Date().toISOString() + ']: ' + req.method + ' ' + req.url)
 
-        var bodyData = '';
+        var body = '';
 
         // normalise path names to avoid issues
         req.url = path.normalize(req.url);
 
         req.on('data', (chunk) => {
             // prematurely terminate the request if exceeds a certain limit
-            if(bodyData.length > 1e11) req.connection.destroy();
-            else bodyData += chunk;
+            if(body.length > 1e11) req.connection.destroy();
+            else body += chunk;
         });
 
         req.on('end', () => {
@@ -76,7 +73,7 @@ var startServer = (webroot, dynPagesList) => {
             
             // dynamically serviceable resources
             if(dynPagesList[parsedUrl.pathname]) {
-                serviceDynamicPage(req, res, bodyData)
+                serviceDynamicPage(req, res, body)
             }
 
             // documents from database
@@ -84,7 +81,7 @@ var startServer = (webroot, dynPagesList) => {
             else if(parsedUrl.pathname.startsWith(docsPath)) {
                 var page = documentServer.servePage(req, res, (err) => {
                     req.url = path404
-                    serviceDynamicPage(req, res, bodyData)
+                    serviceDynamicPage(req, res, body)
                 })
             }
 
@@ -92,7 +89,7 @@ var startServer = (webroot, dynPagesList) => {
             else {
                 fileServer.serve(req, res, (err) => {
                     req.url = path404
-                    serviceDynamicPage(req, res, bodyData)
+                    serviceDynamicPage(req, res, body)
                 });
             }
         }).resume();

@@ -3,11 +3,16 @@ const userType = 'faculty'
 var fs = require('fs')
 
 var auth = require('../auth')
-var wrongUserType = require('../wrongusertype.dyn')
+var wrongUserType = require('../wrongusertype')
 
 var htmldynmodule = require('../../lib/htmldyn/htmldynmodule')
 
+exports.filePath = ''
+
 exports.servePage = (req, res, options) => {
+
+    var filePath = exports.filePath
+
     auth.postAuth(req, res, (currentUser, currentUserType) => {
 
         if(userType !== currentUserType) {
@@ -24,11 +29,11 @@ exports.servePage = (req, res, options) => {
         values.pagetitle = "Faculty's Home"
 
         res.writeHead(200, {
-            'Content-Type': options.type
+            'Content-Type': 'text/html'
         })
 
         fs.readFile(__dirname + '/template.html', 'utf8', (err, templateHtml) => {
-            fs.readFile(options.filepath, options.encoding, (err, viewHtml) => {
+            fs.readFile(filePath, 'utf8', (err, viewHtml) => {
                 values.content = viewHtml
 
                 res.end(

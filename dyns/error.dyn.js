@@ -10,7 +10,11 @@ const errorMessages = {
     '0': 'No error occured.'
 }
 
+exports.filePath = ''
+
 exports.servePage = (req, res, options, body) => {
+
+    var filePath = exports.filePath
 
     var getParams = bodyparsermodule.parseHttpBody(url.parse(req.url).query);
 
@@ -37,10 +41,10 @@ exports.servePage = (req, res, options, body) => {
     var httpStatusCode = (error.code == 0) ? 200 : error.code
 
     res.writeHead(httpStatusCode, {
-        'Content-Type': options.type
+        'Content-Type': 'text/html'
     });
     
-    fs.readFile(options.filepath, options.encoding, (err, data) => {
-        res.end(htmldynmodule.getHtmlStringWithIdValues(data, values), options.encoding);
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        res.end(htmldynmodule.getHtmlStringWithIdValues(data, values), 'utf8');
     });
 }

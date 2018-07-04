@@ -2,6 +2,8 @@ var cookie = require('cookie');
 
 const hashType = 'RSA-SHA';
 
+exports.filePath = ''
+
 exports.servePage = (req, res) => {
 
     var lTokenCookieString = [

@@ -8,10 +8,13 @@ var dbConnect = require('../lib/db/dbconnect');
 
 const hashType = 'RSA-SHA';
 
-exports.servePage = (req, res, options, body) => {
+exports.filePath = ''
+
+exports.servePage = (req, res, body) => {
+
     // for http headers
     var httpHeaders = {
-        'Content-Type': options.type
+        'Content-Type': 'text/plain'
     };
     // parsing cookies
     var cookies = cookie.parse(
