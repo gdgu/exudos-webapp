@@ -1,9 +1,8 @@
 var url = require('url')
-var path = require('path')
 
 var blDocuments = require('./lib/bl/documents')
 
-exports.servePage = (request, response, errDynOptions) => {
+exports.servePage = (request, response, callbackOnError) => {
     var parsedUrl = url.parse(request.url)
 
     var requestedObjectIdString = parsedUrl.pathname.substring(parsedUrl.pathname.lastIndexOf('_') + 1, parsedUrl.pathname.lastIndexOf('.'))
@@ -17,13 +16,9 @@ exports.servePage = (request, response, errDynOptions) => {
             response.end(documentObject.content, 'utf8')
         }
         else {
-            var errorDescription = {
-                code: 404,
-                message: 'This is not the document that you\'re looking for.'
-            }
-            var page = require(
-                path.normalize(__dirname + '/' + errDynOptions.dyn)
-            ).servePage(request, response, errDynOptions, '', errorDescription);
+            var err = new Error('document not found in database')
+            if(callbackOnError !== undefined) callbackOnError(err)
+            else throw err
         }
     })
 }

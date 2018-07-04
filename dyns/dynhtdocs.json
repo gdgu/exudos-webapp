@@ -1,62 +1,12 @@
 {
-    "/":  {
-        "encoding": "utf8",
-        "type": "text/html",
-        "dyn": "dyns/index.dyn.js",
-        "filepath": "htdocs/index.html"
-    },
-    "/index.html":  {
-        "encoding": "utf8",
-        "type": "text/html",
-        "dyn": "dyns/index.dyn.js",
-        "filepath": "htdocs/index.html"
-    },
-    "/error.html": {
-        "encoding": "utf8",
-        "type": "text/html",
-        "dyn": "dyns/error.dyn.js",
-        "filepath": "htdocs/error.html"
-    },
-    "/landing.do": {
-        "encoding": "utf8",
-        "type": "text/html",
-        "dyn": "dyns/landing.dyn.js",
-        "filepath": "htdocs/landing.do"
-    },
-    "/signin.do": {
-        "encoding": "utf8",
-        "type": "text/plain",
-        "dyn": "dyns/signin.dyn.js",
-        "filepath": "htdocs/signin.do"
-    },
-    "/signout.do": {
-        "encoding": "utf8",
-        "type": "text/plain",
-        "dyn": "dyns/signout.dyn.js",
-        "filepath": "htdocs/signout.do"
-    },
-    "/student/": {
-        "encoding": "utf8",
-        "type": "text/html",
-        "dyn": "dyns/student/index.dyn.js",
-        "filepath": "htdocs/student/index.html"
-    },
-    "/student/index.html": {
-        "encoding": "utf8",
-        "type": "text/html",
-        "dyn": "dyns/student/index.dyn.js",
-        "filepath": "htdocs/student/index.html"
-    },
-    "/faculty/": {
-        "encoding": "utf8",
-        "type": "text/html",
-        "dyn": "dyns/faculty/index.dyn.js",
-        "filepath": "htdocs/faculty/index.html"
-    },
-    "/faculty/index.html": {
-        "encoding": "utf8",
-        "type": "text/html",
-        "dyn": "dyns/faculty/index.dyn.js",
-        "filepath": "htdocs/faculty/index.html"
-    }
+    "/": true,
+    "/index.html": true,
+    "/error.html": true,
+    "/landing.do": true,
+    "/signin.do": true,
+    "/signout.do": true,
+    "/student/": true,
+    "/student/index.html": true,
+    "/faculty/": true,
+    "/faculty/index.html": true
 }

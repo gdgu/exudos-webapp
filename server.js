@@ -22,15 +22,33 @@ fs.readFile(dynPagesFile, "utf8", (err, data) => {
     // in case of error in reading file
     if(err) throw new Error("Could not populate the list of dynamically serviceable pages.\n" + err.message);
 
-    var dynPages = JSON.parse(data);
+    var dynPagesList = JSON.parse(data);
 
     // start the web server
-    startServer(webroot, dynPages);
+    startServer(webroot, dynPagesList);
 });
 
-var startServer = (webroot, dynPages) => {
+var serviceDynamicPage = (req, res, bodyData) => {
+
+    var currentPathname = url.parse(req.url).pathname
+
+    if(currentPathname.endsWith('/')) {
+        currentPathname = path.join(currentPathname, 'index.html')
+    }
+
+    var options = {
+        encoding: 'utf8',
+        type: 'text/html',
+        dyn: path.join(dynsroot, currentPathname.substring(0, currentPathname.lastIndexOf('.')) + '.dyn.js'),
+        filepath: path.join(webroot, currentPathname)
+    }
+    
+    var page = require(options.dyn).servePage(req, res, options, bodyData);
+}
+
+var startServer = (webroot, dynPagesList) => {
     // define the path to 404.html
-    const path404 = '/error.html';
+    const path404 = '/error.html?errorCode=404';
 
     // create a static file server
     var fileServer = new static.Server(webroot, {
@@ -55,35 +73,26 @@ var startServer = (webroot, dynPages) => {
 
         req.on('end', () => {
             var parsedUrl = url.parse(req.url);
-
-            var dynOptions = dynPages[parsedUrl.pathname];
-
+            
             // dynamically serviceable resources
-            if(dynOptions !== undefined) {
-                var page = require(
-                    path.normalize(__dirname + '/' + dynOptions.dyn)
-                ).servePage(req, res, dynOptions, bodyData);
+            if(dynPagesList[parsedUrl.pathname]) {
+                serviceDynamicPage(req, res, bodyData)
             }
 
             // documents from database
 
             else if(parsedUrl.pathname.startsWith(docsPath)) {
-                var page = documentServer.servePage(req, res, dynPages[path404])
+                var page = documentServer.servePage(req, res, (err) => {
+                    req.url = path404
+                    serviceDynamicPage(req, res, bodyData)
+                })
             }
 
             // static resources
             else {
                 fileServer.serve(req, res, (err) => {
-                    if(err) {
-                        var dynOptions = dynPages[path404];
-                        var errorDescription = {
-                            code: 404,
-                            message: 'This is not the page that you\'re looking for.'
-                        }
-                        var page = require(
-                            path.normalize(__dirname + '/' + dynOptions.dyn)
-                        ).servePage(req, res, dynOptions, bodyData, errorDescription);
-                    }
+                    req.url = path404
+                    serviceDynamicPage(req, res, bodyData)
                 });
             }
         }).resume();
