@@ -19,7 +19,7 @@
   "homepage": "https://github.com/swghosh/exudos-webapp#readme",
   "dependencies": {
     "cookie": "^0.3.1",
-    "formidable": "^1.2.1",
+    "mime-types": "^2.1.18",
     "mongodb": "^3.0.8",
     "node-static": "^0.7.10"
   }
