@@ -1,5 +1,3 @@
-var fs = require('fs')
-
 var auth = require('./auth')
 
 var htmldynmodule = require('../lib/htmldyn/htmldynmodule')

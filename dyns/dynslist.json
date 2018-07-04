@@ -5,6 +5,7 @@
     "/landing.do": true,
     "/signin.do": true,
     "/signout.do": true,
+    "/upload.do": true,
     "/student/": true,
     "/student/index.html": true,
     "/faculty/": true,
