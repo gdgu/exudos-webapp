@@ -223,3 +223,7 @@ ul.submenu li.disabledfeature a {
 ul.submenu li.disabledfeature a:hover {
     text-decoration: none;
 }
+
+div.content {
+    padding: 5%;
+}

@@ -8,6 +8,7 @@
     "/upload.do": true,
     "/student/": true,
     "/student/index.html": true,
+    "/student/mycourses.html": true,
     "/faculty/": true,
     "/faculty/index.html": true
 }
