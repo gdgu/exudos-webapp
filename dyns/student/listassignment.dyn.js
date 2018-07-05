@@ -7,7 +7,7 @@ var wrongUserType = require('../wrongusertype')
 
 var htmldynmodule = require('../../lib/htmldyn/htmldynmodule')
 
-var blNotices = require('../../lib/bl/notices')
+var blAssignments = require('../../lib/bl/assignments')
 var blCourses = require('../../lib/bl/courses')
 
 exports.filePath = ''
@@ -41,25 +41,52 @@ exports.servePage = (req, res, options) => {
 
                 var contentHtml = htmldynmodule.getHtmlStringWithIdValues(templateHtml, values)
 
-                values.table = makeTable([])
+                var assignments = []
 
-                res.end(
-                    htmldynmodule.getHtmlStringWithIdValues(contentHtml, values)
-                )
+                blCourses.listCoursesForStudent({_id: currentUser[userType]}, (courses) => {
+                    var index = 0
+                    var repeater = (courseAssignments) => {
+                        assignments = assignments.concat(courseAssignments)
+
+                        if(index == courses.length) {
+                            performLast()
+                            return
+                        }
+
+                        blAssignments.listAssignmentsByCourse(courses[index++], repeater)
+                    }
+                    blAssignments.listAssignmentsByCourse(courses[index++], repeater)
+                })
+
+                var performLast = () => {
+
+                    values.table = makeTable(assignments)
+
+                    res.end(
+                        htmldynmodule.getHtmlStringWithIdValues(contentHtml, values)
+                    )
+                }
             })
         })
 
     })
 }
 
-var makeTable = (notices) => {
+var makeTable = (assignments) => {
     var html = ''
 
-    for(var notice of notices) {
+    for(var assignment of assignments) {
 
-        var eleSmall = htmldynmodule.getHtmlTagString('small', `${new Date(notice.dateTime).toLocaleString()}`, 'code')
-        var eleTdTitle = htmldynmodule.getHtmlTagString('td', `posted for ${((notice.school != undefined) ? '🏫 ' + notice.school : '📒 ' + notice.course)} ${eleSmall}`, 'title')
-        var eleTdContent = htmldynmodule.getHtmlTagString('td', `${notice.content}`, 'content')
+        var eleSmall = htmldynmodule.getHtmlTagString('small', `(due: ${new Date(assignment.submitDate).toDateString()})`, 'code')
+        var eleTdTitle = htmldynmodule.getHtmlTagString('td', `posted, 🗓 ${new Date(assignment.publishDate).toDateString()} ${eleSmall}`, 'title')
+        var eleH3 = htmldynmodule.getHtmlTagString('h3', 'Assignment')
+
+        var eleButton = htmldynmodule.getHtmlTagString('span', '📎 Open', 'downloadbutton')
+        var eleAnchor = htmldynmodule.getHtmlTagString('a', eleButton, 'nouline defaultcolor', undefined, {
+            href: '/documents/_' + assignment.document + '.document'
+        })
+
+        var eleTdContent = htmldynmodule.getHtmlTagString('td', `${eleH3} ${eleAnchor}`, 'content')
 
         var eleTr = htmldynmodule.getHtmlTagString('tr', eleTdTitle + eleTdContent, 'card')
 

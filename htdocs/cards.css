@@ -63,9 +63,11 @@ table#news small.code{
 }
 span.downloadbutton {
     display: inline-block;
-    padding: 2%;
+    padding: 0.8%;
+    font-size: 0.8em;
     border: 1px solid rgb(39, 97, 223);
     color: rgb(39, 97, 223);
+    border-radius: 10%;
 }
 span.downloadbutton:hover {
     color: #fff;
