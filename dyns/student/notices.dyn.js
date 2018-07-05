@@ -64,8 +64,6 @@ exports.servePage = (req, res, options) => {
                 
                 var performLast = () => {
 
-                    console.log(notices)
-
                     values.table = makeTable(notices)
 
                     res.end(
@@ -84,7 +82,7 @@ var makeTable = (notices) => {
     for(var notice of notices) {
 
         var eleSmall = htmldynmodule.getHtmlTagString('small', `${new Date(notice.dateTime).toLocaleString()}`, 'code')
-        var eleTdTitle = htmldynmodule.getHtmlTagString('td', `posted for 🏫 ${((notice.school != undefined) ? notice.school : notice.course)} ${eleSmall}`, 'title')
+        var eleTdTitle = htmldynmodule.getHtmlTagString('td', `posted for ${((notice.school != undefined) ? '🏫 ' + notice.school : '📒 ' + notice.course)} ${eleSmall}`, 'title')
         var eleTdContent = htmldynmodule.getHtmlTagString('td', `${notice.content}`, 'content')
 
         var eleTr = htmldynmodule.getHtmlTagString('tr', eleTdTitle + eleTdContent, 'card')

@@ -8,6 +8,8 @@ var wrongUserType = require('../wrongusertype')
 var htmldynmodule = require('../../lib/htmldyn/htmldynmodule')
 
 var blCourses = require('../../lib/bl/courses')
+var blAssignments = require('../../lib/bl/assignments')
+var blIdNames = require('../../lib/bl/idnames')
 
 exports.filePath = ''
 
@@ -68,4 +70,26 @@ var makeTable = (courses) => {
     }
 
     return html
+}
+
+var courseMaterialRelated = (course) => {
+    blCourses.listCourseMaterialByCourse(course, (courseMaterials) => {
+        var index = 0
+        blIdNames.getIdName(courseMaterials[index], (name) => {
+            courseMaterials[index]['name'] = name
+
+            console.log(courseMaterials)
+        })
+    })
+}
+
+var assignmentRelated = (course) => {
+    blAssignments.listAssignmentsByCourse(course, (assignments) => {
+        var index = 0
+        blIdNames.getIdName(assignments[index], (name) => {
+            assignments[index]['name'] = name
+
+            console.log(assignments)
+        })
+    })
 }
