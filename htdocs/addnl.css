@@ -2,19 +2,3 @@ h1 {
     font-family: 'Oxygen', serif;
     letter-spacing: 2px;
 }
-code.id {
-    font-size: 0.8em;
-    background-color: gray;
-    font-family: 'Oxygen', serif;
-    display: inline-block;
-    border-radius: 10%;
-    background-color: rgb(210, 210, 210);
-    padding: 0.7%;
-}
-table small{
-    padding: 0.5%;
-    letter-spacing: 0.1%;
-    background-color: rgb(12, 36, 87);
-    color: #fff;
-    display: inline-block;
-}

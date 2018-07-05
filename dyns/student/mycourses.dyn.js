@@ -41,7 +41,7 @@ exports.servePage = (req, res, options) => {
                 var contentHtml = htmldynmodule.getHtmlStringWithIdValues(templateHtml, values)
 
                 blCourses.listCoursesForStudent({_id: currentUser.student}, (courses) => {
-                    values.table = JSON.stringify(courses)
+                    values.table = makeTable(courses)
 
                     res.end(
                         htmldynmodule.getHtmlStringWithIdValues(contentHtml, values)
@@ -51,4 +51,21 @@ exports.servePage = (req, res, options) => {
         })
 
     })
+}
+
+var makeTable = (courses) => {
+    var html = ''
+
+    for(var course of courses) {
+        var eleSmall = htmldynmodule.getHtmlTagString('small', `(${course.code}, ${course.credits} credits)`, 'code')
+        var eleTdTitle = htmldynmodule.getHtmlTagString('td', `📒 ${course.name} ${eleSmall}`, 'title')
+        var eleH3s = htmldynmodule.getHtmlTagString('h3', 'Course Material(s)') + htmldynmodule.getHtmlTagString('br') + htmldynmodule.getHtmlTagString('h3', 'Assignment(s)') + htmldynmodule.getHtmlTagString('br')
+        var eleTdContent = htmldynmodule.getHtmlTagString('td', `${eleH3s}`, 'content')
+
+        var eleTr = htmldynmodule.getHtmlTagString('tr', eleTdTitle + eleTdContent, 'card')
+
+        html += eleTr
+    }
+
+    return html
 }
