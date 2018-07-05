@@ -7,6 +7,7 @@ var wrongUserType = require('../wrongusertype')
 
 var htmldynmodule = require('../../lib/htmldyn/htmldynmodule')
 
+var blNotices = require('../../lib/bl/notices')
 var blCourses = require('../../lib/bl/courses')
 
 exports.filePath = ''
@@ -28,7 +29,7 @@ exports.servePage = (req, res, options) => {
 
         values.username = currentUser.username
         values.usertype = userType
-        values.pagetitle = "My Courses"
+        values.pagetitle = "Notices"
 
         res.writeHead(200, {
             'Content-Type': 'text/html'
@@ -40,27 +41,51 @@ exports.servePage = (req, res, options) => {
 
                 var contentHtml = htmldynmodule.getHtmlStringWithIdValues(templateHtml, values)
 
+                var notices = []
+
+                blNotices.listNoticesBySchool({name: "Management"}, (schoolNotices) => {
+                    notices = notices.concat(schoolNotices)
+                })
+
                 blCourses.listCoursesForStudent({_id: currentUser[userType]}, (courses) => {
-                    values.table = makeTable(courses)
+                    var index = 0
+                    var repeater = (courseNotices) => {
+                        notices = notices.concat(courseNotices)
+
+                        if(index == courses.length) {
+                            performLast()
+                            return
+                        }
+
+                        blNotices.listNoticesByCourse(courses[index++], repeater)
+                    }
+                    blNotices.listNoticesByCourse(courses[index++], repeater)
+                })
+                
+                var performLast = () => {
+
+                    console.log(notices)
+
+                    values.table = makeTable(notices)
 
                     res.end(
                         htmldynmodule.getHtmlStringWithIdValues(contentHtml, values)
                     )
-                })
+                }
             })
         })
 
     })
 }
 
-var makeTable = (courses) => {
+var makeTable = (notices) => {
     var html = ''
 
-    for(var course of courses) {
-        var eleSmall = htmldynmodule.getHtmlTagString('small', `(${course.code}, ${course.credits} credits)`, 'code')
-        var eleTdTitle = htmldynmodule.getHtmlTagString('td', `📒 ${course.name} ${eleSmall}`, 'title')
-        var eleH3s = htmldynmodule.getHtmlTagString('h3', 'Course Material(s)') + htmldynmodule.getHtmlTagString('br') + htmldynmodule.getHtmlTagString('h3', 'Assignment(s)') + htmldynmodule.getHtmlTagString('br')
-        var eleTdContent = htmldynmodule.getHtmlTagString('td', `${eleH3s}`, 'content')
+    for(var notice of notices) {
+
+        var eleSmall = htmldynmodule.getHtmlTagString('small', `${new Date(notice.dateTime).toLocaleString()}`, 'code')
+        var eleTdTitle = htmldynmodule.getHtmlTagString('td', `posted for 🏫 ${notice.school || notice.course} ${eleSmall}`, 'title')
+        var eleTdContent = htmldynmodule.getHtmlTagString('td', `${notice.content}`, 'content')
 
         var eleTr = htmldynmodule.getHtmlTagString('tr', eleTdTitle + eleTdContent, 'card')
 

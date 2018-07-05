@@ -9,6 +9,7 @@
     "/student/": true,
     "/student/index.html": true,
     "/student/mycourses.html": true,
+    "/student/notices.html": true,
     "/faculty/": true,
     "/faculty/index.html": true
 }
