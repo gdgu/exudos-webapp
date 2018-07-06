@@ -36,8 +36,10 @@ exports.servePage = (req, res, options) => {
             fs.readFile(filePath, 'utf8', (err, viewHtml) => {
                 values.content = viewHtml
 
+                var contentHtml = htmldynmodule.getHtmlStringWithIdValues(templateHtml, values)
+
                 res.end(
-                    htmldynmodule.getHtmlStringWithIdValues(templateHtml, values)
+                    htmldynmodule.getHtmlStringWithIdValues(contentHtml, values)
                 )
             })
         })
