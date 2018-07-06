@@ -33,7 +33,7 @@ ul.tabs {
     margin: 0;
     padding: 0;
     height: 3.6em;
-    text-transform: uppercase;
+    text-transform: capitalize;
     display: inline-block;
 }
 ul.tabs li {

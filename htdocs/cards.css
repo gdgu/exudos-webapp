@@ -59,7 +59,7 @@ table#news small.code{
     letter-spacing: 0.1%;
     background-color: rgb(12, 36, 87);
     color: #fff;
-    display: inline-block;
+    display: inline;
 }
 span.downloadbutton {
     display: inline-block;
