@@ -14,7 +14,7 @@ var blIdNames = require('../../lib/bl/idnames')
 
 exports.filePath = ''
 
-exports.servePage = (req, res, options) => {
+exports.servePage = (req, res) => {
 
     var filePath = exports.filePath
 

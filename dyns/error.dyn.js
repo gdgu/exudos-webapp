@@ -12,7 +12,7 @@ const errorMessages = {
 
 exports.filePath = ''
 
-exports.servePage = (req, res, options, body) => {
+exports.servePage = (req, res, body) => {
 
     var filePath = exports.filePath
 

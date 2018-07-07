@@ -9,7 +9,7 @@ var htmldynmodule = require('../../lib/htmldyn/htmldynmodule')
 
 exports.filePath = ''
 
-exports.servePage = (req, res, options) => {
+exports.servePage = (req, res) => {
 
     var filePath = exports.filePath
 
