@@ -1,6 +1,7 @@
 const userType = 'student'
 
 var fs = require('fs')
+var events = require('events')
 
 var auth = require('../auth')
 var wrongUserType = require('../wrongusertype')
@@ -43,33 +44,76 @@ exports.servePage = (req, res, options) => {
 
                 var notices = []
 
-                blNotices.listNoticesBySchool({name: "Management"}, (schoolNotices) => {
-                    notices = notices.concat(schoolNotices)
-                })
+                var fetchNotices = (callback) => {
 
-                blCourses.listCoursesForStudent({_id: currentUser[userType]}, (courses) => {
-                    var index = 0
-                    var repeater = (courseNotices) => {
-                        notices = notices.concat(courseNotices)
-
-                        if(index == courses.length) {
-                            performLast()
-                            return
-                        }
-
-                        blNotices.listNoticesByCourse(courses[index++], repeater)
-                    }
-                    blNotices.listNoticesByCourse(courses[index++], repeater)
-                })
+                    var notices = []
                 
-                var performLast = () => {
-
+                    var tracker = new events.EventEmitter()
+                    tracker.schoolNoticesDone = false
+                    tracker.coursesNoticesDone = 0
+                
+                    blCourses.listCoursesForStudent({_id: currentUser[userType]}, (courses) => {
+                        tracker.coursesLength = courses.length
+                
+                        for(let course of courses) {
+                            blNotices.listNoticesByCourse(course, (courseNotices) => {
+                                courseNotices = courseNotices.map((notice) => {
+                                    notice.course = course.code
+                                    return notice
+                                })
+                                notices = notices.concat(courseNotices)
+                                
+                                tracker.emit('addCourse')
+                            })
+                        }
+                    })
+                
+                    // WARNING : requires revision (hard coded object)
+                    var school = {name: "Management"}
+                    blNotices.listNoticesBySchool(school, (schoolNotices) => {
+                        schoolNotices = schoolNotices.map((notice) => {
+                            notice.school = `School of ${school.name}`
+                            return notice
+                        })
+                        notices = notices.concat(schoolNotices)
+                
+                        tracker.emit('endSchool')
+                    })
+                
+                    tracker.on('addCourse', () => {
+                        tracker.coursesNoticesDone += 1
+                        if(tracker.coursesNoticesDone == tracker.coursesLength) {
+                            tracker.emit('endCourses')
+                        }
+                    })
+                
+                    tracker.on('endCourses', () => {
+                        tracker.courseNoticesDone = true
+                
+                        if(tracker.courseNoticesDone && tracker.schoolNoticesDone) {
+                            tracker.emit('endAll')
+                        }
+                    })
+                
+                    tracker.on('endSchool', () => {
+                        tracker.schoolNoticesDone = true
+                
+                        if(tracker.courseNoticesDone && tracker.schoolNoticesDone) {
+                            tracker.emit('endAll')
+                        }
+                    })
+                
+                    tracker.on('endAll', () => {
+                        callback(notices)
+                    })
+                }
+                
+                fetchNotices((notices) => {
                     values.table = makeTable(notices)
 
-                    res.end(
-                        htmldynmodule.getHtmlStringWithIdValues(contentHtml, values)
-                    )
-                }
+                    res.end(htmldynmodule.getHtmlStringWithIdValues(contentHtml, values))
+                })
+                
             })
         })
 
