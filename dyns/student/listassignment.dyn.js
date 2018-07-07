@@ -74,10 +74,10 @@ var makeTable = (assignments) => {
         var eleTdTitle = htmldynmodule.getHtmlTagString('td', `posted, 🗓 ${assignment.publishDate} ${eleSmall}`, 'title')
         var eleH3 = htmldynmodule.getHtmlTagString('h3', 'Assignment')
 
-        var eleCodes = htmldynmodule.getHtmlTagString('code', `id: ${assignment.name}`, 'id') + ',' + htmldynmodule.getHtmlTagString('code', `course: ${assignment.course}`, 'id')
+        var eleCodes = htmldynmodule.getHtmlTagString('code', `id: ${assignment.name}`, 'id') + ', ' + htmldynmodule.getHtmlTagString('code', `course: ${assignment.course}`, 'id')
         var eleButton = htmldynmodule.getHtmlTagString('span', '📎 Open', 'downloadbutton')
         var eleAnchor = htmldynmodule.getHtmlTagString('a', eleButton, 'nouline defaultcolor', undefined, {
-            href: '/documents/_' + assignment.document + '.document'
+            href: '/documents/' + assignment.name + 'Assignment_' + assignment.document + '.document'
         })
 
         var eleTdContent = htmldynmodule.getHtmlTagString('td', `${eleH3} ${eleCodes} ${eleBr} ${eleBr} ${eleAnchor} ${eleBr} ${eleBr} An ${assignment.course} assignment that is to be submitted on or before ${assignment.submitDate}.`, 'content')
