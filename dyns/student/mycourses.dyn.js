@@ -1,6 +1,7 @@
 const userType = 'student'
 
 var fs = require('fs')
+var events = require('events')
 
 var auth = require('../auth')
 var wrongUserType = require('../wrongusertype')
@@ -43,11 +44,12 @@ exports.servePage = (req, res) => {
                 var contentHtml = htmldynmodule.getHtmlStringWithIdValues(templateHtml, values)
 
                 blCourses.listCoursesForStudent({_id: currentUser[userType]}, (courses) => {
-                    values.table = makeTable(courses)
+                    
+                    courseMaterialsAndAssignmentsRelated(courses, (courses) => {
+                        values.table = makeTable(courses)
+                        res.end(htmldynmodule.getHtmlStringWithIdValues(contentHtml, values))
 
-                    res.end(
-                        htmldynmodule.getHtmlStringWithIdValues(contentHtml, values)
-                    )
+                    })
                 })
             })
         })
@@ -59,10 +61,40 @@ var makeTable = (courses) => {
     var html = ''
 
     for(var course of courses) {
+        var eleBr = htmldynmodule.getHtmlTagString('br')
         var eleSmall = htmldynmodule.getHtmlTagString('small', `(${course.code}, ${course.credits} credits)`, 'code')
         var eleTdTitle = htmldynmodule.getHtmlTagString('td', `📒 ${course.name} ${eleSmall}`, 'title')
-        var eleH3s = htmldynmodule.getHtmlTagString('h3', 'Course Material(s)') + htmldynmodule.getHtmlTagString('br') + htmldynmodule.getHtmlTagString('h3', 'Assignment(s)') + htmldynmodule.getHtmlTagString('br')
-        var eleTdContent = htmldynmodule.getHtmlTagString('td', `${eleH3s}`, 'content')
+
+        var eleCMs = []
+        for(var courseMaterial of course.courseMaterials) {
+            var eleCode = htmldynmodule.getHtmlTagString('code', `id: ${courseMaterial._id}`, 'id')
+            var eleButton = htmldynmodule.getHtmlTagString('span', '📎 Open', 'downloadbutton')
+            var eleAnchor = htmldynmodule.getHtmlTagString('a', eleButton, 'nouline defaultcolor', undefined, {
+                href: '/documents/' + courseMaterial.name + 'CourseMaterial_' + courseMaterial.document + '.document'
+            })
+            eleCMs.push(eleCode + ' ' + eleAnchor)
+        }
+        if(eleCMs.length == 0) {
+            eleCMs.push(htmldynmodule.getHtmlTagString('code', 'nil', 'id'))
+        }
+        eleCMs = eleCMs.join(',')
+
+        var eleAs = []
+        for(var assignment of course.assignments) {
+            var eleCode = htmldynmodule.getHtmlTagString('code', `id: ${assignment._id}`, 'id')
+            var eleButton = htmldynmodule.getHtmlTagString('span', '📎 Open', 'downloadbutton')
+            var eleAnchor = htmldynmodule.getHtmlTagString('a', eleButton, 'nouline defaultcolor', undefined, {
+                href: '/documents/' + assignment.name + 'Assignment_' + assignment.document + '.document'
+            })
+            eleAs.push(eleCode + ' ' + eleAnchor)
+        }
+        if(eleAs.length == 0) {
+            eleAs.push(htmldynmodule.getHtmlTagString('code', 'nil', 'id'))
+        }
+        eleAs.join(',')
+
+        var eleH3s = htmldynmodule.getHtmlTagString('h3', 'Course Material(s)') + eleCMs + eleBr + htmldynmodule.getHtmlTagString('h3', 'Assignment(s)') + eleAs + eleBr + eleBr
+        var eleTdContent = htmldynmodule.getHtmlTagString('td', `${eleH3s} ${course.name} (${course.code}) is a ${course.credits} credit course that currently has listings for ${course.courseMaterials.length} course material(s) and ${course.assignments.length} assignment(s).`, 'content')
 
         var eleTr = htmldynmodule.getHtmlTagString('tr', eleTdTitle + eleTdContent, 'card')
 
@@ -72,24 +104,79 @@ var makeTable = (courses) => {
     return html
 }
 
-var courseMaterialRelated = (course) => {
-    blCourses.listCourseMaterialByCourse(course, (courseMaterials) => {
-        var index = 0
-        blIdNames.getIdName(courseMaterials[index], (name) => {
-            courseMaterials[index]['name'] = name
+var multipleIdNames = (objects, callback) => {
 
-            console.log(courseMaterials)
-        })
+    var tracker = new events.EventEmitter()
+    tracker.soFar = 0
+
+    tracker.on('add', () => {
+        tracker.soFar += 1
+        if(tracker.soFar == objects.length) {
+            tracker.emit('end')
+        }
     })
+
+    tracker.on('end', () => {
+        callback(objects)
+    })
+
+    for(let index = 0; index < objects.length; index++) {
+        blIdNames.getIdName(objects[index]._id, (name) => {
+            objects[index].name = name
+            tracker.emit('add')
+        })
+    }
 }
 
-var assignmentRelated = (course) => {
-    blAssignments.listAssignmentsByCourse(course, (assignments) => {
-        var index = 0
-        blIdNames.getIdName(assignments[index], (name) => {
-            assignments[index]['name'] = name
+var courseMaterialsAndAssignmentsRelated = (courses, callback) => {
 
-            console.log(assignments)
+    var tracker = new events.EventEmitter()
+    tracker.allCourseMaterialsFetched = tracker.allAssignmentsFetched = false
+    tracker.done = []
+
+    for(let index = 0; index < courses.length; index++) {
+
+        tracker.done.push({
+            courseMaterials: false, assignments: false
         })
+
+        blCourses.listCourseMaterialByCourse(courses[index], (courseMaterials) => {
+            // multipleIdNames(courseMaterials, (courseMaterials) => {
+                courses[index].courseMaterials = courseMaterials
+                tracker.emit('addCM', index)
+            // })
+        })
+        blAssignments.listAssignmentsByCourse(courses[index], (assignments) => {
+            // multipleIdNames(assignments, (assignments) => {
+                courses[index].assignments = assignments
+                tracker.emit('addA', index)
+            // })
+        })
+    }
+
+    tracker.on('addCM', (index) => {
+        tracker.done[index].courseMaterials = true
+
+        if(tracker.done.every((aDone) => aDone.courseMaterials)) {
+            tracker.allCourseMaterialsFetched = true
+            tracker.emit('checkEnd')
+        }
+    })
+    tracker.on('addA', (index) => {
+        tracker.done[index].assignments = true
+        if(tracker.done.every((aDone) => aDone.assignments)) {
+            tracker.allAssignmentsFetched = true
+            tracker.emit('checkEnd')
+        }
+    })
+
+    tracker.on('checkEnd', () => {
+        if(tracker.allCourseMaterialsFetched && tracker.allAssignmentsFetched) {
+            tracker.emit('end')
+        }
+    })
+
+    tracker.on('end', () => {
+        callback(courses)
     })
 }
