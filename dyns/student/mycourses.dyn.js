@@ -162,36 +162,30 @@ var courseMaterialsAndAssignmentsRelated = (courses, callback) => {
     }
 
     tracker.on('addCM', (index) => {
-        console.log('**addCM**', index)
         tracker.soFar[index].courseMaterials += 1
         if(tracker.soFar[index].courseMaterials == tracker.total[index].courseMaterials) {
             tracker.emit('doneCM', index)
         }
     })
     tracker.on('doneCM', (index) => {
-        console.log('**doneCM**', index)
         tracker.done[index].courseMaterials = true
 
         tracker.emit('checkEnd')
     })
 
     tracker.on('addA', (index) => {
-        console.log('**addA**', index)
         tracker.soFar[index].assignments += 1
         if(tracker.soFar[index].assignments == tracker.total[index].assignments){
             tracker.emit('doneA', index)
         }
     })
     tracker.on('doneA', (index) => {
-        console.log('**doneA**', index)
         tracker.done[index].assignments = true
 
         tracker.emit('checkEnd')
     })
 
     tracker.on('checkEnd', () => {
-
-        console.log('**checkEnd**', tracker.done)
 
         if(tracker.done.map((done) => {
             return Object.values(done).reduce(and)
