@@ -9,10 +9,10 @@
         <label for="blob">Document <sup class="red">*</sup></label>
         <input type="text" name="blob" placeholder="Answer file" required="required" disabled="disabled" />
         <br><br>
-        <input name="file" type="file" required="required" />
+        <input name="file" type="file" required="required" maxlength="16000000" />
         <br><br>
         <small class="note">
-            Fields marked with <span class="red">*</span> indicates that they are required.<br><br>
+            Fields marked with <span class="red">*</span> indicates that they are required.<br>Maximum file upload size is <b>11 megabytes.</b><br><br>
             The document to be uploaded must contain <b>answers</b> to the selected assignment.<br>Please ensure that the document be a file of <b>standard format</b> like <b>pdf, docx, doc, txt, rtf, etc.</b><br>The same will be sent for <b>review</b> to the respective course faculty.
         </small>
         <button type="submit"> submit </button>
