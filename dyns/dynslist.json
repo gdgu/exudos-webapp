@@ -8,9 +8,9 @@
     "/upload.do": true,
     "/student/": true,
     "/student/index.html": true,
-    "/student/mycourses.html": true,
-    "/student/notices.html": true,
-    "/student/listassignment.html": true,
     "/faculty/": true,
-    "/faculty/index.html": true
+    "/faculty/index.html": true,
+    "/mycourses.html": true,
+    "/notices.html": true,
+    "/listassignment.html": true
 }
