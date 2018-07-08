@@ -134,7 +134,7 @@ var courseMaterialsAndAssignmentsRelated = (courses, callback) => {
 
             courses[index].courseMaterials = []
             for(let anotherIndex = 0; anotherIndex < courseMaterials.length; anotherIndex++) {
-                blIdNames.getIdName(courseMaterials[anotherIndex], (name) => {
+                blIdNames.getIdName(courseMaterials[anotherIndex]._id, (name) => {
                     courseMaterials[anotherIndex].name = name
                     courses[index].courseMaterials.push(courseMaterials[anotherIndex])
                     tracker.emit('addCM', index)
@@ -151,7 +151,7 @@ var courseMaterialsAndAssignmentsRelated = (courses, callback) => {
 
             courses[index].assignments = []
             for(let anotherIndex = 0; anotherIndex < assignments.length; anotherIndex++) {
-                blIdNames.getIdName(assignments[anotherIndex], (name) => {
+                blIdNames.getIdName(assignments[anotherIndex]._id, (name) => {
                     assignments[anotherIndex].name = name
                     courses[index].assignments.push(assignments[anotherIndex])
                     tracker.emit('addA', index)
