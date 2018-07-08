@@ -1,5 +1,4 @@
 var blobInput = document.querySelector('input[name=blob]')
-blobInput.value = ''
 
 var fileInput = document.querySelector('input[name=file]')
 fileInput.addEventListener('change', function() {
