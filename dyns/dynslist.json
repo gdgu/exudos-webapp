@@ -11,6 +11,7 @@
     "/student/submitassignment.html": true,
     "/faculty/": true,
     "/faculty/index.html": true,
+    "/faculty/uploadcoursematerial.html": true,
     "/mycourses.html": true,
     "/notices.html": true,
     "/listassignment.html": true

@@ -1,0 +1,21 @@
+<h1>
+    Upload Course Material
+</h1>
+    
+<div class="formholder">
+    <form method="POST">
+        <label for="code">Course Code <sup class="red">*</sup></label>
+        <input type="text" name="code" placeholder="eg. ITM1001" required="required" /><br>
+        <label for="blob">Document <sup class="red">*</sup></label>
+        <input type="text" name="blob" placeholder="Course material file" required="required" disabled="disabled" />
+        <br><br>
+        <input name="file" type="file" required="required" />
+        <br><br>
+        <small class="note">
+            Fields marked with <span class="red">*</span> indicates that they are required.<br><br>
+            The document to be uploaded must contain <b>study material</b> for the selected course.<br>Please ensure that the document be a file of <b>standard format</b> like <b>pdf, docx, doc, txt, rtf, html, png, etc.</b><br>An <b>id name</b> will be automatically generated for the uploaded course material.<br>The same will be accessible by the course students.
+        </small>
+        <button type="submit"> upload </button>
+    </form>
+</div>
+<script src="/forfileforms.js"></script>

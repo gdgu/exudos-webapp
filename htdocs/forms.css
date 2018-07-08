@@ -32,7 +32,10 @@ input[type=file] {
     background-color: rgba(49, 10, 12, 0.5);
     color: #fff;
     width: 50%;
-    
+}
+input[type=file]:hover {
+    background-color: rgba(49, 10, 12, 0.7);
+    box-shadow: 0 0 2px rgba(49, 10, 12, 0.7);
 }
 button {
     color: black;
