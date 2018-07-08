@@ -3,13 +3,13 @@
 </h1>
     
 <div class="formholder">
-    <form method="POST">
+    <form method="POST" action="createassignment.do">
         <label for="code">Course Code <sup class="red">*</sup></label>
         <input type="text" name="code" placeholder="eg. ITM1001" required="required" /><br>
         <label for="date">Submission Date <sup class="red">*</sup></label>
         <input type="date" name="date" placeholder="eg. 2018-01-01 (yyyy-mm-dd)" required="required" /><br>
         <label for="blob">Document <sup class="red">*</sup></label>
-        <input type="text" name="blob" placeholder="Assignment file" required="required" readonly="readonly" maxlength="16000000" />
+        <input type="text" name="blob" placeholder="Assignment file (auto)" required="required" readonly="readonly" maxlength="16000000" />
         <br><br>
         <input name="file" type="file" required="required" />
         <br><br>
