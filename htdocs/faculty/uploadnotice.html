@@ -25,3 +25,33 @@
         <button type="submit"> upload </button>
     </form>
 </div>
+
+<script>
+    var spans = {'school': document.querySelector('span#school'), 'course': document.querySelector('span#course')}
+
+    spans['course'].style.display = 'none'
+
+    var toggle = function() {
+        var value = this.value
+
+        if(value == 'school') {
+            spans['school'].style.display = null
+            spans['school'].lastElementChild.disabled = false
+
+            spans['course'].style.display = 'none'
+            spans['course'].lastElementChild.disabled = true
+        }
+        else if(value == 'course') {
+            spans['course'].style.display = null
+            spans['course'].lastElementChild.disabled = false
+
+            spans['school'].style.display = 'none'
+            spans['school'].lastElementChild.disabled = true
+        }
+    }
+
+    var radioInputs = document.querySelectorAll('input[name=target]')
+    radioInputs.forEach(function(radioInput) {
+        radioInput.addEventListener('click', toggle)
+    })
+</script>
