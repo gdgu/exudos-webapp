@@ -67,7 +67,7 @@ var makeTable = (courses) => {
 
         var eleCMs = []
         for(var courseMaterial of course.courseMaterials) {
-            var eleCode = htmldynmodule.getHtmlTagString('code', `id: ${courseMaterial._id}`, 'id')
+            var eleCode = htmldynmodule.getHtmlTagString('code', `id: ${courseMaterial.name}`, 'id')
             var eleButton = htmldynmodule.getHtmlTagString('span', '📎 Open', 'downloadbutton')
             var eleAnchor = htmldynmodule.getHtmlTagString('a', eleButton, 'nouline defaultcolor', undefined, {
                 href: '/documents/' + courseMaterial.name + 'CourseMaterial_' + courseMaterial.document + '.document'
@@ -81,7 +81,7 @@ var makeTable = (courses) => {
 
         var eleAs = []
         for(var assignment of course.assignments) {
-            var eleCode = htmldynmodule.getHtmlTagString('code', `id: ${assignment._id}`, 'id')
+            var eleCode = htmldynmodule.getHtmlTagString('code', `id: ${assignment.name}`, 'id')
             var eleButton = htmldynmodule.getHtmlTagString('span', '📎 Open', 'downloadbutton')
             var eleAnchor = htmldynmodule.getHtmlTagString('a', eleButton, 'nouline defaultcolor', undefined, {
                 href: '/documents/' + assignment.name + 'Assignment_' + assignment.document + '.document'
@@ -104,74 +104,98 @@ var makeTable = (courses) => {
     return html
 }
 
-var multipleIdNames = (objects, callback) => {
-
-    var tracker = new events.EventEmitter()
-    tracker.soFar = 0
-
-    tracker.on('add', () => {
-        tracker.soFar += 1
-        if(tracker.soFar == objects.length) {
-            tracker.emit('end')
-        }
-    })
-
-    tracker.on('end', () => {
-        callback(objects)
-    })
-
-    for(let index = 0; index < objects.length; index++) {
-        blIdNames.getIdName(objects[index]._id, (name) => {
-            objects[index].name = name
-            tracker.emit('add')
-        })
-    }
-}
+const and = (flagA, flagB) => flagA && flagB
 
 var courseMaterialsAndAssignmentsRelated = (courses, callback) => {
 
     var tracker = new events.EventEmitter()
-    tracker.allCourseMaterialsFetched = tracker.allAssignmentsFetched = false
+    tracker.soFar = []
+    tracker.total = []
     tracker.done = []
 
     for(let index = 0; index < courses.length; index++) {
 
+        tracker.soFar.push({
+            courseMaterials: 0, assignments: 0
+        })
+        tracker.total.push({
+            courseMaterials: 0, assignments: 0
+        })
         tracker.done.push({
             courseMaterials: false, assignments: false
         })
 
         blCourses.listCourseMaterialByCourse(courses[index], (courseMaterials) => {
-            // multipleIdNames(courseMaterials, (courseMaterials) => {
-                courses[index].courseMaterials = courseMaterials
-                tracker.emit('addCM', index)
-            // })
+            tracker.total[index].courseMaterials = courseMaterials.length
+
+            if(courseMaterials.length == 0) {
+                tracker.done[index].courseMaterials = true
+            }
+
+            courses[index].courseMaterials = []
+            for(let anotherIndex = 0; anotherIndex < courseMaterials.length; anotherIndex++) {
+                blIdNames.getIdName(courseMaterials[anotherIndex], (name) => {
+                    courseMaterials[anotherIndex].name = name
+                    courses[index].courseMaterials.push(courseMaterials[anotherIndex])
+                    tracker.emit('addCM', index)
+                })
+            }
         })
+
         blAssignments.listAssignmentsByCourse(courses[index], (assignments) => {
-            // multipleIdNames(assignments, (assignments) => {
-                courses[index].assignments = assignments
-                tracker.emit('addA', index)
-            // })
+            tracker.total[index].assignments = assignments.length
+
+            if(assignments.length == 0) {
+                tracker.done[index].assignments = true
+            }
+
+            courses[index].assignments = []
+            for(let anotherIndex = 0; anotherIndex < assignments.length; anotherIndex++) {
+                blIdNames.getIdName(assignments[anotherIndex], (name) => {
+                    assignments[anotherIndex].name = name
+                    courses[index].assignments.push(assignments[anotherIndex])
+                    tracker.emit('addA', index)
+                })
+            }
+
         })
     }
 
     tracker.on('addCM', (index) => {
-        tracker.done[index].courseMaterials = true
-
-        if(tracker.done.every((aDone) => aDone.courseMaterials)) {
-            tracker.allCourseMaterialsFetched = true
-            tracker.emit('checkEnd')
+        console.log('**addCM**', index)
+        tracker.soFar[index].courseMaterials += 1
+        if(tracker.soFar[index].courseMaterials == tracker.total[index].courseMaterials) {
+            tracker.emit('doneCM', index)
         }
     })
+    tracker.on('doneCM', (index) => {
+        console.log('**doneCM**', index)
+        tracker.done[index].courseMaterials = true
+
+        tracker.emit('checkEnd')
+    })
+
     tracker.on('addA', (index) => {
-        tracker.done[index].assignments = true
-        if(tracker.done.every((aDone) => aDone.assignments)) {
-            tracker.allAssignmentsFetched = true
-            tracker.emit('checkEnd')
+        console.log('**addA**', index)
+        tracker.soFar[index].assignments += 1
+        if(tracker.soFar[index].assignments == tracker.total[index].assignments){
+            tracker.emit('doneA', index)
         }
+    })
+    tracker.on('doneA', (index) => {
+        console.log('**doneA**', index)
+        tracker.done[index].assignments = true
+
+        tracker.emit('checkEnd')
     })
 
     tracker.on('checkEnd', () => {
-        if(tracker.allCourseMaterialsFetched && tracker.allAssignmentsFetched) {
+
+        console.log('**checkEnd**', tracker.done)
+
+        if(tracker.done.map((done) => {
+            return Object.values(done).reduce(and)
+        }).every((item) => item)) {
             tracker.emit('end')
         }
     })
