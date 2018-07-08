@@ -129,7 +129,7 @@ var courseMaterialsAndAssignmentsRelated = (courses, callback) => {
             tracker.total[index].courseMaterials = courseMaterials.length
 
             if(courseMaterials.length == 0) {
-                tracker.done[index].courseMaterials = true
+                tracker.emit('doneCM', index)
             }
 
             courses[index].courseMaterials = []
@@ -146,7 +146,7 @@ var courseMaterialsAndAssignmentsRelated = (courses, callback) => {
             tracker.total[index].assignments = assignments.length
 
             if(assignments.length == 0) {
-                tracker.done[index].assignments = true
+                tracker.emit('doneA', index)
             }
 
             courses[index].assignments = []
