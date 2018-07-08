@@ -1,0 +1,27 @@
+<h1>
+    Upload Notice
+</h1>
+    
+<div class="formholder">
+    <form method="POST" action="uploadnotice.do">
+        <label for="target">Target <sup class="red">*</sup></label><br>
+        <input type="radio" name="target" value="school" checked="checked"> Specific School<br>
+        <input type="radio" name="target" value="course"> Specific Course<br><br>
+        <label for="content">Notice Content <sup class="red">*</sup></label>
+        <input type="text" name="content" placeholder="eg. This is to notify that ... (your notice message follows)" required="required" /><br>
+        <span id="school">
+            <label for="target">School Name <sup class="red">*</sup></label><br>
+            School of: <input type="text" name="target" placeholder="eg. Management" required="required" /><br>
+        </span>
+        <span id="course">
+            <label for="target">Course Code <sup class="red">*</sup></label>
+            <input type="text" name="target" placeholder="eg. ITM1001" required="required" />
+        </span>
+        <br><br>
+        <small class="note">
+            Fields marked with <span class="red">*</span> indicates that they are required.<br><br>
+            Please select either <b>school (school name)</b> or <b>course (course code)</b> as the notice <b>target</b>.<br>The same will be visible to the respective school or course students (as applicable).
+        </small>
+        <button type="submit"> upload </button>
+    </form>
+</div>

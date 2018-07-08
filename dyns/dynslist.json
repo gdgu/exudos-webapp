@@ -13,6 +13,7 @@
     "/faculty/index.html": true,
     "/faculty/uploadcoursematerial.html": true,
     "/faculty/createassignment.html": true,
+    "/faculty/uploadnotice.html": true,
     "/mycourses.html": true,
     "/notices.html": true,
     "/listassignment.html": true
