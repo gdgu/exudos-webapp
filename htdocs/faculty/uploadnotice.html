@@ -14,8 +14,13 @@
             School of: <input type="text" name="target" placeholder="eg. Management" required="required" /><br>
         </span>
         <span id="course">
-            <label for="target">Course Code <sup class="red">*</sup></label>
-            <input type="text" name="target" placeholder="eg. ITM1001" required="required" />
+            <label for="code">Course Code <sup class="red">*</sup></label>
+            <input type="text" name="code" placeholder="eg. ITM1001" required="required" /><br>
+            <small>suggested code(s):</small>
+            <span class="autofiller">
+                <code class="id">writtenWempe</code>
+            </span>
+            <br>    
         </span>
         <br><br>
         <small class="note">
@@ -54,4 +59,52 @@
     radioInputs.forEach(function(radioInput) {
         radioInput.addEventListener('click', toggle)
     })
+</script>
+
+<script>
+    var courseCodeInput = document.querySelector('input[name=code]')
+    var autofillerSpan = document.querySelector('span.autofiller')
+    var courseCodes = []
+
+    var request = new XMLHttpRequest()
+    request.open('GET', '/courseslist.json')
+
+    request.onreadystatechange = function() {
+        if(request.readyState == 4 && request.status == 200) {
+            var courses = JSON.parse(request.responseText)
+            courseCodes = courses.map(function(course) {
+                return course.code
+            })
+            addAutofillers()
+        }
+    }
+    request.send()
+
+    function addAutofillers() {
+        autofillerSpan.innerHTML = ''
+        var autofillersCodes = courseCodes.map(function(courseCode) {
+            return '<code class="id" id="' + courseCode + '">' + courseCode + '</code>'
+        })
+        autofillersCodes = autofillersCodes.join(', ')
+        autofillerSpan.innerHTML = autofillersCodes
+
+        var autofillersCodes = document.querySelectorAll('span.autofiller code.id')
+        autofillersCodes.forEach(function(codeElement) {
+            codeElement.style.cursor = 'pointer'
+            codeElement.addEventListener('click', function() {
+                courseCodeInput.value = this.id
+                courseCodeInput.onchange()
+            })
+        })
+    }
+
+    courseCodeInput.onchange = function() {
+        if(!courseCodes.includes(courseCodeInput.value)) {
+            alert('Invalid COURSE CODE was specified. Select a CODE from the autofill box.')
+            courseCodeInput.style.color = 'red'
+        }
+        else {
+            courseCodeInput.style.color = null
+        }
+    }
 </script>
