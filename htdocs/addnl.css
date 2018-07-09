@@ -2,3 +2,17 @@ h1 {
     font-family: 'Oxygen', serif;
     letter-spacing: 2px;
 }
+blockquote {
+    font-family: 'Oxygen', serif;
+    width: 75%;
+    display: inline-block;
+    background-color: #eee;
+    padding: 5%;
+    text-align: left;
+    border-left: solid #777 10px;
+    min-height: 20vh;
+}
+dl dd {
+    color: #999;
+    padding: 1%;
+}
