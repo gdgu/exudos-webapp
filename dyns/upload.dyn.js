@@ -12,7 +12,6 @@ exports.filePath = ''
 exports.servePage = (req, res, body) => {
     auth.postAuth(req, res, (currentUser, userType) => {
         var postParams = bodyparsermodule.parseHttpBody(body)
-        console.log(postParams)
 
         var blob = postParams['blob']
 
