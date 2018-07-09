@@ -31,7 +31,7 @@ input[type=file] {
     font-size: 0.9em;
     background-color: rgba(49, 10, 12, 0.5);
     color: #fff;
-    min-width: 90%;
+    width: 65%;
 }
 input[type=file]:hover {
     background-color: rgba(49, 10, 12, 0.7);
