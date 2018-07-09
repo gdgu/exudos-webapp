@@ -16,5 +16,6 @@
     "/faculty/uploadnotice.html": true,
     "/mycourses.html": true,
     "/notices.html": true,
-    "/listassignment.html": true
+    "/listassignment.html": true,
+    "/courseslist.json": true
 }
