@@ -4,13 +4,15 @@ h1 {
 }
 blockquote {
     font-family: 'Oxygen', serif;
-    width: 75%;
+    width: 90%;
+    max-width: 700px;
     display: inline-block;
     background-color: #eee;
     padding: 5%;
     text-align: left;
     border-left: solid #777 10px;
     min-height: 20vh;
+    margin: 0;
 }
 dl dd {
     color: #999;
