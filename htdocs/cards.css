@@ -45,7 +45,7 @@ table#news img.incard {
     margin-left: -12.5%;
     margin-right: -12.5%;
 }
-table#news code.id {
+code.id {
     font-size: 0.8em;
     background-color: gray;
     font-family: 'Oxygen', serif;

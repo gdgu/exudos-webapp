@@ -5,7 +5,11 @@
 <div class="formholder">
     <form method="POST" action="submitassignment.do">
         <label for="id">Assignment Id <sup class="red">*</sup></label>
-        <input type="text" name="id" placeholder="eg. shrillAnstet" required="required" /><br>
+        <input type="text" name="id" placeholder="eg. writtenWempe" required="required" /><br>
+        <span class="autofiller">
+            <code class="id">writtenWempe</code>
+        </span>
+        <br><br><br>
         <label for="blob">Document <sup class="red">*</sup></label>
         <input type="text" name="blob" placeholder="Answer file (auto)" required="required" readonly="readonly" maxlength="16000000" />
         <br><br>
@@ -19,3 +23,51 @@
     </form>
 </div>
 <script src="/forfileforms.js"></script>
+<script>
+    var assignmentIdInput = document.querySelector('input[name=id]')
+    var autofillerSpan = document.querySelector('span.autofiller')
+    var assignmentIds = []
+    assignmentIds.incl
+
+    var request = new XMLHttpRequest()
+    request.open('GET', '/assignmentslist.json')
+
+    request.onreadystatechange = function() {
+        if(request.readyState == 4 && request.status == 200) {
+            var assignments = JSON.parse(request.responseText)
+            assignmentIds = assignments.map(function(assignment) {
+                return assignment.name
+            })
+            addAutofillers()
+        }
+    }
+    request.send()
+
+    function addAutofillers() {
+        autofillerSpan.innerHTML = ''
+        var autofillersCodes = assignmentIds.map(function(assignmentId) {
+            return '<code class="id" id="' + assignmentId + '">' + assignmentId + '</code>'
+        })
+        autofillersCodes = autofillersCodes.join(',')
+        autofillerSpan.innerHTML = autofillersCodes
+
+        var autofillersCodes = document.querySelectorAll('span.autofiller code.id')
+        autofillersCodes.forEach(function(codeElement) {
+            codeElement.style.cursor = 'pointer'
+            codeElement.addEventListener('click', function() {
+                assignmentIdInput.value = this.id
+                assignmentIdInput.onchange()
+            })
+        })
+    }
+
+    assignmentIdInput.onchange = function() {
+        if(!assignmentIds.includes(assignmentIdInput.value)) {
+            alert('Invalid ASSIGNMENT ID was specified. Select an ID from the autofill box.')
+            assignmentIdInput.style.color = 'red'
+        }
+        else {
+            assignmentIdInput.style.color = null
+        }
+    }
+</script>
