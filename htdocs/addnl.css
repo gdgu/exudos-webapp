@@ -18,3 +18,36 @@ dl dd {
     color: #999;
     padding: 1%;
 }
+
+div.notificationwrapper {
+    transition: all 1s;
+    font-family: 'Oxygen', serif;
+    font-size: 0.85em;
+    width: 100%;
+    position: fixed;
+    left: 0;
+    z-index: 10;
+    text-align: center;
+}
+div.notificationwrapper.doesnotexist {
+    display: none;
+}
+div.notificationwrapper.out {
+    top: -2.5em;
+    opacity: 0;
+}
+div.notificationwrapper.in {
+    top: 2.5em;
+    opacity: 1;
+}
+div.notification {
+    text-transform: lowercase;
+    letter-spacing: 2px;
+    background-color: rgb(108, 139, 132);
+    color: #fff; 
+    padding: 0.5em; 
+    margin: 0;
+    display: inline;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+    border-radius: 0.5em;
+}
