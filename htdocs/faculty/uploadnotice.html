@@ -10,12 +10,12 @@
         <label for="content">Notice Content <sup class="red">*</sup></label>
         <input type="text" name="content" placeholder="eg. This is to notify that ... (your notice message follows)" required="required" /><br>
         <span id="school">
-            <label for="target">School Name <sup class="red">*</sup></label><br>
-            School of: <input type="text" name="target" placeholder="eg. Management" required="required" /><br>
+            <label for="school">School Name <sup class="red">*</sup></label><br>
+            School of: <input type="text" name="school" placeholder="eg. Management" required="required" /><br>
         </span>
         <span id="course">
             <label for="code">Course Code <sup class="red">*</sup></label>
-            <input type="text" name="code" placeholder="eg. ITM1001" required="required" /><br>
+            <input type="text" name="code" placeholder="eg. ITM1001" disabled="disabled" /><br>
             <small>suggested code(s):</small>
             <span class="autofiller">
                 <code class="id">writtenWempe</code>
@@ -33,6 +33,7 @@
 
 <script>
     var spans = {'school': document.querySelector('span#school'), 'course': document.querySelector('span#course')}
+    var specificInputs = {'school': document.querySelector('input[name=school]'), 'course': document.querySelector('input[name=code]')}
 
     spans['course'].style.display = 'none'
 
@@ -41,17 +42,21 @@
 
         if(value == 'school') {
             spans['school'].style.display = null
-            spans['school'].lastElementChild.disabled = false
+            specificInputs['school'].disabled = false
+            specificInputs['school'].removeAttribute('required')
 
             spans['course'].style.display = 'none'
-            spans['course'].lastElementChild.disabled = true
+            specificInputs['course'].disabled = true
+            specificInputs['course'].setAttribute('required', 'required')
         }
         else if(value == 'course') {
             spans['course'].style.display = null
-            spans['course'].lastElementChild.disabled = false
+            specificInputs['course'].disabled = false
+            specificInputs['course'].removeAttribute('required')
 
             spans['school'].style.display = 'none'
-            spans['school'].lastElementChild.disabled = true
+            specificInputs['school'].disabled = true
+            specificInputs['school'].setAttribute('required', 'required')
         }
     }
 
