@@ -1,11 +1,13 @@
 const userType = 'faculty'
 
 var fs = require('fs')
+var url = require('url')
 
 var auth = require('../auth')
 var wrongUserType = require('../wrongusertype')
 
 var htmldynmodule = require('../../lib/htmldyn/htmldynmodule')
+var bodyparsermodule = require('../../lib/htmldyn/bodyparsermodule')
 
 exports.filePath = ''
 
@@ -23,6 +25,18 @@ exports.servePage = (req, res) => {
         }
 
         var values = JSON.parse(fs.readFileSync('dyns/globalvars.json', 'utf8'));
+
+        var getParams = bodyparsermodule.parseHttpBody(url.parse(req.url).query);
+
+        if(getParams['success'] !== undefined) {
+            values.notification = '✅ course material uploaded';
+        }
+        else if(getParams['failed'] !== undefined) {
+            values.notification = '❌ upload failed';
+        }
+        else {
+            values.notification = '';
+        }
 
         values.username = currentUser.username
         values.usertype = userType
