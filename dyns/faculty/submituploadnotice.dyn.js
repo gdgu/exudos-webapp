@@ -22,8 +22,6 @@ exports.servePage = (req, res, body) => {
 
         var postParams = bodyparsermodule.parseHttpBody(body);
 
-        console.log(postParams)
-
         res.writeHead(200, {
             'Content-Type': 'application/json'
         })
