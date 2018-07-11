@@ -1,7 +1,6 @@
+var querystring = require('querystring')
 var cookie = require('cookie');
 var crypto = require('crypto');
-
-var bodyparsermodule = require('../lib/htmldyn/bodyparsermodule');
 
 var authenticateUser = require('../lib/bl/authenticateuser');
 var dbConnect = require('../lib/db/dbconnect');
@@ -21,7 +20,7 @@ exports.servePage = (req, res, body) => {
         (req.headers.cookie) ? req.headers.cookie : ''
     );
 
-    var postParams = bodyparsermodule.parseHttpBody(body);
+    var postParams = querystring.parse(body);
     console.log(postParams)
 
     var afterAuth = (flag, currentUser) => {

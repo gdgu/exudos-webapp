@@ -2,11 +2,10 @@ const userType = 'student'
 
 var fs = require('fs')
 var events = require('events')
+var querystring = require('querystring')
 
 var auth = require('../auth')
 var wrongUserType = require('../wrongusertype')
-
-var bodyparsermodule = require('../../lib/htmldyn/bodyparsermodule')
 
 var blAssignments = require('../../lib/bl/assignments')
 var blIdNames = require('../../lib/bl/idnames')
@@ -28,7 +27,7 @@ exports.servePage = (req, res, body) => {
             return
         }
 
-        var postParams = bodyparsermodule.parseHttpBody(body);
+        var postParams = querystring.parse(body);
 
         var page = new events.EventEmitter()
         page.on('failed', () => {

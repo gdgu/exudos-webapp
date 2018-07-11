@@ -1,7 +1,7 @@
+var querystring = require('querystring')
 var mimeTypes = require('mime-types')
 
 var auth = require('./auth')
-var bodyparsermodule = require('../lib/htmldyn/bodyparsermodule');
 
 var blDocuments = require('../lib/bl/documents')
 
@@ -11,7 +11,7 @@ exports.filePath = ''
 
 exports.servePage = (req, res, body) => {
     auth.postAuth(req, res, (currentUser, userType) => {
-        var postParams = bodyparsermodule.parseHttpBody(body)
+        var postParams = querystring.parse(body)
 
         var blob = postParams['blob']
 

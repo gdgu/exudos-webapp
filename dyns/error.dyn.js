@@ -1,8 +1,8 @@
 var fs = require('fs');
 var url = require('url');
+var querystring = require('querystring')
 
 var htmldynmodule = require('../lib/htmldyn/htmldynmodule');
-var bodyparsermodule = require('../lib/htmldyn/bodyparsermodule');
 
 const errorMessages = {
     '404': 'This is not the file that you are looking for.',
@@ -16,7 +16,7 @@ exports.servePage = (req, res, body) => {
 
     var filePath = exports.filePath
 
-    var getParams = bodyparsermodule.parseHttpBody(url.parse(req.url).query);
+    var getParams = querystring.parse(url.parse(req.url).query);
 
     var errorCode = ((getParams['errorCode'] !== undefined) ? getParams['errorCode'] : '0') || '0'
 

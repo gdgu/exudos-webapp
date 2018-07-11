@@ -1,11 +1,10 @@
 const userType = 'faculty'
 
 var fs = require('fs')
+var querystring = require('querystring')
 
 var auth = require('../auth')
 var wrongUserType = require('../wrongusertype')
-
-var bodyparsermodule = require('../../lib/htmldyn/bodyparsermodule')
 
 exports.filePath = ''
 
@@ -20,7 +19,7 @@ exports.servePage = (req, res, body) => {
             return
         }
 
-        var postParams = bodyparsermodule.parseHttpBody(body);
+        var postParams = querystring.parse(body);
 
         res.writeHead(200, {
             'Content-Type': 'application/json'

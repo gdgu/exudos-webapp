@@ -1,6 +1,7 @@
 var fs = require('fs');
+var querystring = require('querystring')
+
 var htmldynmodule = require('../lib/htmldyn/htmldynmodule');
-var bodyparsermodule = require('../lib/htmldyn/bodyparsermodule');
 var url = require('url');
 
 exports.filePath = ''
@@ -12,7 +13,7 @@ exports.servePage = (req, res, body) => {
     // custom set of default values used by all pages
     var values = JSON.parse(fs.readFileSync('dyns/globalvars.json', 'utf8'));
     // GET parameters passed in url
-    var getParams = bodyparsermodule.parseHttpBody(url.parse(req.url).query);
+    var getParams = querystring.parse(url.parse(req.url).query);
 
     // custom message based on error parameter
     if(getParams['invalidUser'] !== undefined) {
