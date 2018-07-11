@@ -51,7 +51,7 @@ exports.servePage = (req, res, body) => {
             page.emit('failed')
         }
 
-        else if(postParams['target'] == 'school' && (postParams['name'] == '' || postParams['name'] == null)) {
+        else if(postParams['target'] == 'school' && (postParams['school'] == '' || postParams['school'] == null)) {
             page.emit('failed')
         }
 
@@ -63,12 +63,12 @@ exports.servePage = (req, res, body) => {
             var target = postParams['target']
 
             if(target == 'school') {
-                var schoolName = postParams['name']
+                var schoolName = postParams['school']
                 // WARNING: requires revision, use htmlspecialchars like function here to protect from XSS
                 var content = postParams['content']
 
                 // WARNING : requires revision (hard coded object)
-                var notice = new Notice(new Date(), content, {_id: new (require('mongodb')).ObjectId("5ace2636b0b7c599bac20e11")})
+                var notice = new Notice(new Date(), content, new (require('mongodb')).ObjectId("5ace2636b0b7c599bac20e11"))
                 blNotices.createNotice(notice, (flag) => {
                     if(flag) {
                         page.emit('success')

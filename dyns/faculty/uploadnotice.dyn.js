@@ -29,7 +29,7 @@ exports.servePage = (req, res) => {
         var getParams = querystring.parse(url.parse(req.url).query);
 
         if(getParams['success'] !== undefined) {
-            values.notification = '✅ course material uploaded';
+            values.notification = '✅ notice uploaded';
         }
         else if(getParams['failed'] !== undefined) {
             values.notification = '❌ upload failed';
