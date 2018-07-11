@@ -48,7 +48,7 @@ exports.servePage = (req, res, body) => {
 
         var dataUrlRegex = /data:(.+\/.+);base64,(.*)/
         
-        if(postParams['id'] == null || postParams['id'] == '' || postParams['blob'] == null || postParams['blob'] == null) {
+        if(postParams['id'] == null || postParams['id'] == '' || postParams['blob'] == null || postParams['blob'] == '') {
             page.emit('failed')
         }
 
