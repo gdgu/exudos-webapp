@@ -20,16 +20,19 @@ exports.servePage = (req, res, body) => {
         var document = new Document(Buffer.from(matches[2], 'base64'), matches[1])
         var extension = mimeTypes.extension(document.mimeType)
 
-        blDocuments.addDocument(document, (flag, idString) => {
-            res.writeHead(200, {
+        blDocuments.addDocument(document, (flag, objectId) => {
+            res.writeHead(302, {
                 'Content-Type': 'text/plain'
             })
 
             if(flag) {
-                res.end('_' + idString + '.' + extension)
+                res.writeHead(302, {
+                    'Location': '/documents/uploadedFile_' + objectId + '.' + extension
+                })
+                res.end('_' + objectId + '.' + extension)
             }
             else {
-                res.end('failed upload', idString)
+                res.end('failed upload', objectId)
             }
         })
     })
