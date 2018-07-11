@@ -8,6 +8,11 @@ const Notification = function Notification(message) {
     this.clear = function() {
         this.notificationWrapperDiv.outerHTML = ''
     }
+
+    notificationOn = false
+    notificationExists = true
+    notificationWrapperDiv = document.querySelector('div.notificationwrapper')
+    notificationDiv = document.querySelector('div.notification')
 }
 
 var notificationOn = false
@@ -27,6 +32,8 @@ if(notificationWrapperDiv == null || notificationWrapperDiv.classList.contains('
 function notificationPopIn() {
     notificationWrapperDiv.classList.toggle('in')
     notificationWrapperDiv.classList.toggle('out')
+    var audio = new Audio('/iOSTextNoteNotificationSound.mp3')
+    audio.play()
     notificationOn = true
 }
 
