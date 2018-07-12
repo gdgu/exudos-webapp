@@ -7,6 +7,8 @@ var events = require('events')
 var auth = require('../auth')
 var wrongUserType = require('../wrongusertype')
 
+var htmldynmodule = require('../../lib/htmldyn/htmldynmodule')
+
 var blCourses = require('../../lib/bl/courses')
 var blNotices = require('../../lib/bl/notices')
 
@@ -64,8 +66,7 @@ exports.servePage = (req, res, body) => {
 
             if(target == 'school') {
                 var schoolName = postParams['school']
-                // WARNING: requires revision, use htmlspecialchars like function here to protect from XSS
-                var content = postParams['content']
+                var content = htmldynmodule.escapeHtmlSpecialCharacters(postParams['content'])
 
                 // WARNING : requires revision (hard coded object)
                 var notice = new Notice(new Date(), content, new (require('mongodb')).ObjectId("5ace2636b0b7c599bac20e11"))
@@ -81,8 +82,7 @@ exports.servePage = (req, res, body) => {
 
             else if(target == 'course') {
                 var courseCode = postParams['code']
-                // WARNING: requires revision, use htmlspecialchars like function here to protect from XSS
-                var content = postParams['content']
+                var content = htmldynmodule.escapeHtmlSpecialCharacters(postParams['content'])
 
                 blCourses.getCourseObjectId({code: courseCode}, (courseObjectId) => {
 
