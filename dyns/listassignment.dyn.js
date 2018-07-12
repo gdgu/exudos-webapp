@@ -60,6 +60,10 @@ exports.servePage = (req, res) => {
 }
 
 var makeTable = (assignments) => {
+
+    // sort assignments on the basis of publishDate (descending)
+    assignments.sort((assignmentA, assignmentB) => assignmentB.publishDate - assignmentA.publishDate)
+
     var html = ''
 
     for(var assignment of assignments) {

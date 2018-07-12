@@ -1,6 +1,6 @@
 {
   "name": "exudos-webapp",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A student information system to facilitate students with their informative needs.",
   "main": "server.js",
   "scripts": {

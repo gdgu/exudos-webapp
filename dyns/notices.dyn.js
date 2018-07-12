@@ -120,6 +120,10 @@ exports.servePage = (req, res) => {
 }
 
 var makeTable = (notices) => {
+
+    // sort notices on the basis of dateTime (descending)
+    notices.sort((noticeA, noticeB) => noticeB.dateTime - noticeA.dateTime)
+
     var html = ''
 
     for(var notice of notices) {
