@@ -44,6 +44,10 @@ exports.servePage = (req, res) => {
 
 var multipleIdNames = (objects, callback) => {
 
+    if(objects.length == 0) {
+        callback(objects)
+    }
+
     var tracker = new events.EventEmitter()
     tracker.soFar = 0
 
@@ -67,6 +71,10 @@ var multipleIdNames = (objects, callback) => {
 }
 
 var multipleAssignments = (courses, callback) => {
+
+    if(courses.length == 0) {
+        callback([])
+    }
 
     var assignments = []
 
