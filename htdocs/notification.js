@@ -32,8 +32,6 @@ if(notificationWrapperDiv == null || notificationWrapperDiv.classList.contains('
 function notificationPopIn() {
     notificationWrapperDiv.classList.toggle('in')
     notificationWrapperDiv.classList.toggle('out')
-    var audio = new Audio('/iOSTextNoteNotificationSound.mp3')
-    audio.play()
     notificationOn = true
 }
 
