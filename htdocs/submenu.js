@@ -12,11 +12,9 @@ var listOfMenuItems = [
         id: 'forums',
         title: 'Forum',
         submenu: [
-            'newchat', 'messages', 'notices', 'uploadnotice'
+            'notices', 'uploadnotice'
         ],
-        disabled: [
-            'newchat', 'messages'
-        ],
+        disabled: [],
         togglestate: false
     },
     {
