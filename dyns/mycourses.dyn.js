@@ -107,6 +107,11 @@ const and = (flagA, flagB) => flagA && flagB
 
 var courseMaterialsAndAssignmentsRelated = (courses, callback) => {
 
+    if(courses.length == 0) {
+        callback([])
+        return
+    }
+
     var tracker = new events.EventEmitter()
     tracker.soFar = []
     tracker.total = []

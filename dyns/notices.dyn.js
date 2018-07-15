@@ -52,6 +52,12 @@ exports.servePage = (req, res) => {
                     tracker.coursesNoticesDone = 0
                 
                     blCourses.listCourses({_id: currentUser[currentUserType]}, (courses) => {
+
+                        if(courses.length == 0) {
+                            tracker.emit('endCourses')
+                            return
+                        }
+
                         tracker.coursesLength = courses.length
                 
                         for(let course of courses) {

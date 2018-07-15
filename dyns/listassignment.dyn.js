@@ -95,6 +95,11 @@ var makeTable = (assignments) => {
 
 var multipleIdNames = (objects, callback) => {
 
+    if(objects.length == 0) {
+        callback(objects)
+        return
+    }
+
     var tracker = new events.EventEmitter()
     tracker.soFar = 0
 
@@ -118,6 +123,11 @@ var multipleIdNames = (objects, callback) => {
 }
 
 var multipleAssignments = (courses, callback) => {
+
+    if(courses.length == 0) {
+        callback([])
+        return
+    }
 
     var assignments = []
 
