@@ -22,5 +22,6 @@
     "/notices.html": true,
     "/listassignment.html": true,
     "/courseslist.json": true,
-    "/assignmentslist.json": true
+    "/assignmentslist.json": true,
+    "/profile.html": true
 }
