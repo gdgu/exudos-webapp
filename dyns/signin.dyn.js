@@ -3,7 +3,6 @@ var cookie = require('cookie');
 var crypto = require('crypto');
 
 var authenticateUser = require('../lib/bl/authenticateuser');
-var dbConnect = require('../lib/db/dbconnect');
 
 const hashType = 'RSA-SHA';
 
