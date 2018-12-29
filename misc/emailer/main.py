@@ -2,8 +2,7 @@
 
 """ 
     requires: 
-    1. flask=*,
-    2. dkimpy=*
+    1. flask=*
     (same must be specified in requirements.txt)
 """
 
@@ -16,17 +15,14 @@
     5. FROM_ADDRESS: Email address of the sender
     6. FROM_NAME: Name of the sender
     7. REPLY_TO_ADDRESS: Email address whom the recepient will revert
-    8. DKIM_SELECTOR: Selector key for DKIM
-    9. DKIM_DOMAIN: Domain name for DKIM
 """
 
 
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
-import dkim
 
-from flask import jsonify, make_response
+from flask import Flask, jsonify, make_response, request
 
 import os
 
@@ -41,11 +37,6 @@ PASSWORD = os.environ['SMTP_PASSWORD']
 FROM_ADDRESS = os.environ['FROM_ADDRESS']
 FROM_NAME = os.environ['FROM_NAME']
 REPLY_TO_ADDRESS = os.environ['REPLY_TO_ADDRESS']
-
-PRIVATE_KEY = open('private_key.pem').read()
-
-DKIM_SELECTOR = os.environ['DKIM_SELECTOR']
-DKIM_DOMAIN = os.environ['DKIM_DOMAIN']
 
 def send_email(to_email, subject, body):
     """
@@ -64,10 +55,6 @@ def send_email(to_email, subject, body):
 
         message.attach(MIMEText(body, 'plain'))
 
-        signature = dkim.sign(message.as_bytes(), DKIM_SELECTOR.encode(), DKIM_DOMAIN.encode(), PRIVATE_KEY.encode()).decode()
-        signature = signature.lstrip("DKIM-Signature: ")
-        message['DKIM-Signature'] = signature
-
         # send the message
         server.sendmail(FROM_ADDRESS, to_email, message.as_string())
         server.quit()
@@ -81,7 +68,10 @@ def send_email(to_email, subject, body):
             'success': True,
         }
 
-def serve_request(request):
+app = Flask(__name__)
+
+@app.route('/email', methods = ['POST'])
+def serve_request():
     """
         Will serve a GCP Cloud Function to send
         email based on received trigger json
