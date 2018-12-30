@@ -1,0 +1,39 @@
+version: '3'
+services:
+  webapp:
+    build: .
+    image: gdgu/exudos-web
+    restart: unless-stopped
+    ports:
+      - "80:8080"
+    depends_on:
+      - emailer
+      - database
+    links:
+      - emailer
+      - database
+    environment:
+      MONGO_HOST: database
+      MONGO_USER: root
+      MONGO_PASSWD: password
+      MONGO_DB: admin
+      EMAIL_URL: http://emailer:8080/email
+
+  emailer:
+    build: misc/emailer
+    image: gdgu/exudos-emailer
+    restart: unless-stopped
+    expose:
+      - "8080"
+    env_file:
+      - ./emailer.env
+    
+  database:
+    image: mongo
+    volumes:
+      - ../../data/mongodb:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password
+    expose:
+      - "27017"
