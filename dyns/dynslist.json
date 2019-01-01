@@ -23,5 +23,7 @@
     "/listassignment.html": true,
     "/courseslist.json": true,
     "/assignmentslist.json": true,
-    "/profile.html": true
+    "/profile.html": true,
+    "/university/": true,
+    "/university/index.html": true
 }
