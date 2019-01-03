@@ -12,8 +12,6 @@ services:
     environment:
       # inter communication
       MONGO_HOST: database
-      MONGO_USER: user
-      MONGO_PASSWD: password
       MONGO_DB: exudos
       # inter communication
       EMAIL_URL: http://emailer:8080/email
