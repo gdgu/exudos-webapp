@@ -4,7 +4,7 @@ var crypto = require('crypto');
 
 var authenticateUser = require('../lib/bl/authenticateuser');
 
-const hashType = 'RSA-SHA';
+const hashType = 'SHA256';
 
 exports.filePath = ''
 
