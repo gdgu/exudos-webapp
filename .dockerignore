@@ -1,4 +1,8 @@
 .git
+.vscode
+.github
 node_modules
 npm-debug.log
 .vscode
+misc
+docker-compose.yml
